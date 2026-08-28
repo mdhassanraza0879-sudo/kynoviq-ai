@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     String         @id @default(cuid())
+  name                   String?
+  email                  String         @unique
+  password               String
+  image                  String?
+  stripeCustomerId       String?        @unique
+  stripeSubscriptionId   String?        @unique
+  stripePriceId          String?
+  stripeCurrentPeriodEnd DateTime?
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+
+  conversations          Conversation[]
+  savedItems             SavedItem[]
+  toolUsages             ToolUsage[]
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String
+  userId    String
+  toolType  String    @default("CHAT")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  role           String       // "user" | "assistant" | "system"
+  content        String
+  createdAt      DateTime     @default(now())
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model SavedItem {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  toolType  String   // "CHAT" | "SUMMARIZER" | "STUDY" | "CODE" | "WRITING" | "IDEAS"
+  content   String
+  metadata  String?  // JSON stringified optional metadata
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ToolUsage {
+  id            String   @id @default(cuid())
+  userId        String
+  toolType      String   // "SUMMARIZER" | "STUDY" | "CODE" | "WRITING" | "IDEAS" | "CHAT"
+  inputSnippet  String?
+  outputSnippet String?
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
