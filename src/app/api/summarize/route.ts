@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     }
 
     const { text, length } = result.data;
-    const summary = await AIService.generateSummary(text, length);
+    const summary = await AIService.generateSummary(text, { length: length as any });
 
     try {
       await prisma.toolUsage.create({

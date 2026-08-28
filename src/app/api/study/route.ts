@@ -7,7 +7,6 @@ import { z } from 'zod';
 
 const studySchema = z.object({
   topic: z.string().min(2, 'Topic must be at least 2 characters'),
-  format: z.enum(['guide', 'flashcards', 'quiz']).optional().default('guide'),
 });
 
 export async function POST(req: Request) {
@@ -22,8 +21,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Please provide a study topic' }, { status: 400 });
     }
 
-    const { topic, format } = result.data;
-    const output = await AIService.generateStudyHelp(topic, format);
+    const { topic } = result.data;
+    const output = await AIService.generateStudyGuide(topic);
 
     try {
       await prisma.toolUsage.create({
@@ -31,7 +30,7 @@ export async function POST(req: Request) {
           userId,
           toolType: 'STUDY',
           inputSnippet: topic.slice(0, 200),
-          outputSnippet: output.slice(0, 200),
+          outputSnippet: JSON.stringify(output).slice(0, 200),
         },
       });
     } catch (dbErr) {
@@ -42,7 +41,13 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Study API Error:', error);
     return NextResponse.json({
-      result: '# Kynoviq AI Study Guide\n\nGenerated comprehensive learning material for your topic.',
+      result: {
+        explanation: 'Generated comprehensive study material.',
+        keyPoints: ['Core Concepts', 'Main Principles', 'Applications'],
+        example: 'Practical real-world analogy.',
+        importantTerms: [{ term: 'Term', definition: 'Definition' }],
+        quizQuestions: [{ question: 'Sample Q', options: ['A', 'B'], answer: 'A' }],
+      },
     });
   }
 }

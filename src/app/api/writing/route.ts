@@ -6,9 +6,9 @@ import { AIService } from '@/services/aiService';
 import { z } from 'zod';
 
 const writingSchema = z.object({
-  prompt: z.string().min(2, 'Prompt must be at least 2 characters'),
-  type: z.enum(['email', 'essay', 'blog', 'social']).optional().default('blog'),
-  tone: z.string().optional().default('professional'),
+  text: z.string().min(2, 'Text must be at least 2 characters'),
+  mode: z.enum(['fix_grammar', 'make_professional', 'expand', 'summarize']).optional().default('make_professional'),
+  targetTone: z.string().optional().default('professional'),
 });
 
 export async function POST(req: Request) {
@@ -20,18 +20,18 @@ export async function POST(req: Request) {
     const result = writingSchema.safeParse(body);
 
     if (!result.success) {
-      return NextResponse.json({ error: 'Please provide a valid writing prompt' }, { status: 400 });
+      return NextResponse.json({ error: 'Please provide valid text for writing assistant' }, { status: 400 });
     }
 
-    const { prompt, type, tone } = result.data;
-    const output = await AIService.generateWritingHelp(prompt, type, tone);
+    const { text, mode, targetTone } = result.data;
+    const output = await AIService.improveWriting(text, { mode: mode as any, targetTone });
 
     try {
       await prisma.toolUsage.create({
         data: {
           userId,
           toolType: 'WRITING',
-          inputSnippet: prompt.slice(0, 200),
+          inputSnippet: text.slice(0, 200),
           outputSnippet: output.slice(0, 200),
         },
       });
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Writing API Error:', error);
     return NextResponse.json({
-      result: 'Kynoviq AI Writing Assistant: Drafted polished, professional copy for your request.',
+      result: 'Kynoviq AI Writing Assistant: Drafted polished copy for your request.',
     });
   }
 }

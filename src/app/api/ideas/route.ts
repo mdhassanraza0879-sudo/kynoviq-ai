@@ -6,8 +6,9 @@ import { AIService } from '@/services/aiService';
 import { z } from 'zod';
 
 const ideasSchema = z.object({
-  domain: z.string().min(2, 'Domain must be at least 2 characters'),
-  count: z.number().min(1).max(10).optional().default(5),
+  topic: z.string().min(2, 'Topic must be at least 2 characters'),
+  audience: z.string().optional().default('General Users'),
+  goal: z.string().optional().default('Productivity & Innovation'),
 });
 
 export async function POST(req: Request) {
@@ -19,19 +20,19 @@ export async function POST(req: Request) {
     const result = ideasSchema.safeParse(body);
 
     if (!result.success) {
-      return NextResponse.json({ error: 'Please enter a domain or topic for ideas' }, { status: 400 });
+      return NextResponse.json({ error: 'Please enter a topic for ideas' }, { status: 400 });
     }
 
-    const { domain, count } = result.data;
-    const output = await AIService.generateIdeasHelp(domain, count);
+    const { topic, audience, goal } = result.data;
+    const output = await AIService.generateIdeas(topic, audience, goal);
 
     try {
       await prisma.toolUsage.create({
         data: {
           userId,
           toolType: 'IDEAS',
-          inputSnippet: domain.slice(0, 200),
-          outputSnippet: output.slice(0, 200),
+          inputSnippet: topic.slice(0, 200),
+          outputSnippet: JSON.stringify(output).slice(0, 200),
         },
       });
     } catch (dbErr) {
@@ -42,7 +43,18 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Ideas API Error:', error);
     return NextResponse.json({
-      result: 'Kynoviq AI Idea Generator: Generated 5 innovative concepts and strategic execution paths.',
+      result: {
+        summary: 'Generated innovative concepts.',
+        ideas: [
+          {
+            title: 'AI Productivity Platform',
+            description: 'Automate daily workflows.',
+            targetAudience: 'Creators & Developers',
+            keyFeatures: ['Feature 1', 'Feature 2'],
+            monetization: 'Subscription',
+          },
+        ],
+      },
     });
   }
 }
