@@ -34,18 +34,32 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Please enter an email and password.');
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email.toLowerCase().trim() },
+        const normalizedEmail = credentials.email.toLowerCase().trim();
+
+        let user = await prisma.user.findUnique({
+          where: { email: normalizedEmail },
         });
 
+        // Auto-seed Founder account on Vercel if missing
+        if (!user && normalizedEmail.includes('mdhassanraza0879@gmail.com')) {
+          const hashedPassword = await bcrypt.hash(credentials.password || 'Kynoviq2026!', 12);
+          user = await prisma.user.create({
+            data: {
+              name: 'Mohammad Hassan Raza (Founder)',
+              email: normalizedEmail,
+              password: hashedPassword,
+            },
+          });
+        }
+
         if (!user || !user.password) {
-          throw new Error('No user found with this email address.');
+          throw new Error('No account found with this email address.');
         }
 
         const isValidPassword = await bcrypt.compare(credentials.password, user.password);
 
         if (!isValidPassword) {
-          throw new Error('Invalid email or password.');
+          throw new Error('Invalid password. Please try again.');
         }
 
         return {
@@ -62,22 +76,22 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 Days
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       if (account?.provider === 'google' || account?.provider === 'github') {
         if (!user.email) return false;
         
-        // Find or create user in Prisma DB
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email.toLowerCase().trim() },
+        const normalizedEmail = user.email.toLowerCase().trim();
+        let existingUser = await prisma.user.findUnique({
+          where: { email: normalizedEmail },
         });
 
         if (!existingUser) {
           const newUser = await prisma.user.create({
             data: {
-              email: user.email.toLowerCase().trim(),
+              email: normalizedEmail,
               name: user.name || 'OAuth User',
               image: user.image || null,
-              password: '', // OAuth users have no password
+              password: '',
             },
           });
           user.id = newUser.id;
@@ -105,5 +119,5 @@ export const authOptions: NextAuthOptions = {
     newUser: '/register',
     error: '/login',
   },
-  secret: process.env.NEXTAUTH_SECRET || 'kynoviq_secret_key_fallback',
+  secret: process.env.NEXTAUTH_SECRET || 'kynoviq_production_jwt_secret_key_2026_fallback',
 };
