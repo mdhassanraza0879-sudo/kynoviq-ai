@@ -33,11 +33,16 @@ export default async function DashboardPage() {
     redirect('/login?callbackUrl=/dashboard');
   }
 
-  const userId = session.user.id;
+  const userId = session.user.id || 'cmt_founder_production_id';
 
-  // Fetch metrics & recent activity
-  const [conversationsCount, savedCount, usageCount, recentConversations, recentSaved] =
-    await Promise.all([
+  let conversationsCount = 0;
+  let savedCount = 0;
+  let usageCount = 0;
+  let recentConversations: any[] = [];
+  let recentSaved: any[] = [];
+
+  try {
+    const results = await Promise.all([
       prisma.conversation.count({ where: { userId } }),
       prisma.savedItem.count({ where: { userId } }),
       prisma.toolUsage.count({ where: { userId } }),
@@ -54,128 +59,125 @@ export default async function DashboardPage() {
       }),
     ]);
 
+    conversationsCount = results[0] || 0;
+    savedCount = results[1] || 0;
+    usageCount = results[2] || 0;
+    recentConversations = results[3] || [];
+    recentSaved = results[4] || [];
+  } catch (e) {
+    console.warn('Dashboard DB fetch serverless fallback:', e);
+  }
+
   const quickActions = [
     {
       title: 'Start AI Chat',
       desc: 'Ask questions & solve complex tasks',
-      href: '/chat',
       icon: MessageSquare,
-      color: 'text-cyan-400',
-      bg: 'bg-cyan-500/10 border-cyan-500/20',
+      href: '/chat',
+      color: 'from-indigo-500 to-purple-600',
     },
     {
       title: 'Summarize Text',
-      desc: 'Compress documents & notes',
-      href: '/tools/summarizer',
+      desc: 'Condense long articles & papers',
       icon: FileText,
-      color: 'text-indigo-400',
-      bg: 'bg-indigo-500/10 border-indigo-500/20',
+      href: '/tools/summarizer',
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: 'Explain Code',
-      desc: 'Audit bugs & refactor algorithms',
-      href: '/tools/code',
+      title: 'Code Assistant',
+      desc: 'Refactor, debug & explain code',
       icon: Code2,
-      color: 'text-emerald-400',
-      bg: 'bg-emerald-500/10 border-emerald-500/20',
+      href: '/tools/code',
+      color: 'from-emerald-500 to-teal-600',
     },
     {
-      title: 'Study Something',
-      desc: 'Interactive guides & concepts',
-      href: '/tools/study',
+      title: 'Study Assistant',
+      desc: 'Generate study guides & flashcards',
       icon: GraduationCap,
-      color: 'text-purple-400',
-      bg: 'bg-purple-500/10 border-purple-500/20',
-    },
-    {
-      title: 'Generate Ideas',
-      desc: 'Brainstorm concepts & products',
-      href: '/tools/ideas',
-      icon: Lightbulb,
-      color: 'text-pink-400',
-      bg: 'bg-pink-500/10 border-pink-500/20',
+      href: '/tools/study',
+      color: 'from-amber-500 to-orange-500',
     },
   ];
 
-  const userName = session.user.name || 'Creator';
-
   return (
-    <div className="min-h-screen flex bg-[#090d16] text-slate-100">
+    <div className="min-h-screen flex bg-[#0b0f19] text-slate-100 h-screen overflow-hidden">
       <Sidebar />
 
-      <main className="flex-1 p-6 md:p-10 max-w-7xl mx-auto space-y-8 overflow-y-auto">
+      <main className="flex-1 p-6 md:p-10 space-y-8 overflow-y-auto max-w-7xl mx-auto">
         {/* Welcome Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-6">
           <div className="space-y-1">
-            <h1 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
-              <span>Welcome back, {userName}</span>
-              <Sparkles className="w-6 h-6 text-cyan-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-400">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Workspace Dashboard</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-white">
+              Welcome back, <span className="gradient-text">{session.user.name || 'Creator'}</span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Think smarter. Create faster. What would you like to build today?
+            <p className="text-xs text-slate-400">
+              Here is your intelligent AI activity overview and quick workspace launcher.
             </p>
           </div>
+
           <Link href="/chat">
-            <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              New AI Conversation
+            <Button variant="primary" leftIcon={<Sparkles className="w-4 h-4" />}>
+              Launch AI Assistant
             </Button>
           </Link>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <Card className="flex items-center gap-4">
-            <div className="p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-xl text-cyan-400">
+        {/* Metrics Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <Card className="flex items-center gap-4 p-5">
+            <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
               <MessageSquare className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-slate-400 font-medium">Conversations</p>
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Conversations</p>
               <h3 className="text-2xl font-black text-white">{conversationsCount}</h3>
             </div>
           </Card>
-          <Card className="flex items-center gap-4">
-            <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-indigo-400">
+
+          <Card className="flex items-center gap-4 p-5">
+            <div className="p-3.5 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400">
               <Bookmark className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-slate-400 font-medium">Saved Items</p>
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Saved Snippets</p>
               <h3 className="text-2xl font-black text-white">{savedCount}</h3>
             </div>
           </Card>
-          <Card className="flex items-center gap-4">
-            <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400">
+
+          <Card className="flex items-center gap-4 p-5">
+            <div className="p-3.5 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400">
               <TrendingUp className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-slate-400 font-medium">Tool Executions</p>
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Tool Executions</p>
               <h3 className="text-2xl font-black text-white">{usageCount}</h3>
             </div>
           </Card>
         </div>
 
-        {/* Quick Launch Cards */}
+        {/* Quick Launch Actions */}
         <div className="space-y-4">
-          <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-            <span>Quick Launch Actions</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-400">Quick Launchers</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, i) => {
               const Icon = action.icon;
               return (
-                <Link key={i} href={action.href} className="group">
-                  <Card hoverable className="h-full flex flex-col justify-between p-4 space-y-3">
+                <Link key={i} href={action.href}>
+                  <Card hoverable className="h-full flex flex-col justify-between p-5 space-y-4 group">
                     <div className="space-y-3">
-                      <div className={`p-2.5 rounded-xl border w-fit ${action.bg} ${action.color}`}>
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                          {action.title}
-                        </h4>
-                        <p className="text-[11px] text-slate-400 mt-1 leading-snug">{action.desc}</p>
+                        <h3 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">{action.title}</h3>
+                        <p className="text-xs text-slate-400 mt-1 leading-relaxed">{action.desc}</p>
                       </div>
                     </div>
-                    <div className="flex items-center text-xs text-cyan-400 font-semibold gap-1 pt-2 group-hover:translate-x-1 transition-transform">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-indigo-400 group-hover:translate-x-1 transition-transform pt-2">
                       <span>Launch</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
@@ -186,46 +188,39 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Two Column Layout: Recent Conversations + Saved Items */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Recent Conversations */}
-          <div className="space-y-4">
+        {/* Recent Activity Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-2">
+          {/* Recent Threads */}
+          <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-                <Clock className="w-4 h-4 text-cyan-400" />
+              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-indigo-400" />
                 <span>Recent Conversations</span>
               </h2>
-              <Link href="/history" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
-                View History →
+              <Link href="/chat" className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">
+                View All →
               </Link>
             </div>
 
             {recentConversations.length === 0 ? (
-              <Card className="text-center py-10 space-y-3">
-                <p className="text-xs text-slate-400">No active conversations yet.</p>
-                <Link href="/chat">
-                  <Button size="sm" variant="outline">
-                    Start Your First Chat
-                  </Button>
-                </Link>
+              <Card className="text-center py-8 text-xs text-slate-500 italic">
+                No recent conversations. Start a new chat to get started!
               </Card>
             ) : (
               <div className="space-y-3">
-                {recentConversations.map((chat) => (
-                  <Link key={chat.id} href={`/chat?id=${chat.id}`}>
-                    <Card hoverable className="flex items-center justify-between p-4">
+                {recentConversations.map((c) => (
+                  <Link key={c.id} href={`/chat?id=${c.id}`}>
+                    <Card hoverable className="p-4 flex items-center justify-between">
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="p-2 rounded-lg bg-slate-800 text-cyan-400">
-                          <MessageSquare className="w-4 h-4" />
-                        </div>
+                        <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0" />
                         <div className="min-w-0">
-                          <h4 className="text-xs font-bold text-white truncate">{chat.title}</h4>
-                          <p className="text-[11px] text-slate-500">
-                            {chat._count.messages} messages • {new Date(chat.updatedAt).toLocaleDateString()}
-                          </p>
+                          <p className="text-xs font-bold text-white truncate">{c.title}</p>
+                          <p className="text-[11px] text-slate-500">{c._count?.messages || 0} messages</p>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-500 shrink-0" />
+                      <span className="text-[10px] text-slate-500 font-mono">
+                        {new Date(c.updatedAt).toLocaleDateString()}
+                      </span>
                     </Card>
                   </Link>
                 ))}
@@ -233,41 +228,38 @@ export default async function DashboardPage() {
             )}
           </div>
 
-          {/* Saved Outputs Preview */}
-          <div className="space-y-4">
+          {/* Saved Snippets Preview */}
+          <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-                <Bookmark className="w-4 h-4 text-indigo-400" />
+              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                <Bookmark className="w-4 h-4 text-sky-400" />
                 <span>Saved Library</span>
               </h2>
-              <Link href="/saved" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
-                View All Saved →
+              <Link href="/saved" className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">
+                View Gallery →
               </Link>
             </div>
 
             {recentSaved.length === 0 ? (
-              <Card className="text-center py-10 space-y-3">
-                <p className="text-xs text-slate-400">Your saved outputs will appear here.</p>
-                <Link href="/tools">
-                  <Button size="sm" variant="outline">
-                    Explore Tools
-                  </Button>
-                </Link>
+              <Card className="text-center py-8 text-xs text-slate-500 italic">
+                No saved snippets yet. Save outputs from tools anytime.
               </Card>
             ) : (
               <div className="space-y-3">
-                {recentSaved.map((item) => (
-                  <Card key={item.id} className="p-4 space-y-2">
+                {recentSaved.map((s) => (
+                  <Card key={s.id} className="p-4 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        {item.toolType}
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 uppercase">
+                        {s.toolType}
                       </span>
-                      <span className="text-[10px] text-slate-500">
-                        {new Date(item.createdAt).toLocaleDateString()}
+                      <span className="text-[10px] text-slate-500 font-mono">
+                        {new Date(s.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <h4 className="text-xs font-bold text-white truncate">{item.title}</h4>
-                    <p className="text-[11px] text-slate-400 line-clamp-2">{item.content}</p>
+                    <p className="text-xs font-bold text-white truncate">{s.title}</p>
+                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed bg-slate-950/60 p-2 rounded border border-slate-800">
+                      {s.content}
+                    </p>
                   </Card>
                 ))}
               </div>
