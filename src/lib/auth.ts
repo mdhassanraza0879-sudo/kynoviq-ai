@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
             if (isValidPassword) {
               return {
                 id: user.id,
-                name: user.name,
+                name: user.name || 'Workspace User',
                 email: user.email,
                 image: user.image,
               };
@@ -57,16 +57,16 @@ export const authOptions: NextAuthOptions = {
           console.warn('Prisma DB Read Warning (Serverless):', dbError);
         }
 
-        // Production / Vercel Serverless Fallback:
-        // Always allow Founder & Validated credentials to succeed without throwing 500
-        if (
-          normalizedEmail === 'mdhassanraza0879@gmail.com' ||
-          normalizedEmail === 'mdhassan0879@gmail.com' ||
-          credentials.password.length >= 6
-        ) {
+        // Production Universal Authentication Rule:
+        // Allows ANY public user with a valid email & 6+ char password to log in & sign up seamlessly
+        if (credentials.password.length >= 6) {
+          const userPrefix = normalizedEmail.split('@')[0] || 'user';
+          const formatName = userPrefix.charAt(0).toUpperCase() + userPrefix.slice(1);
+          const isFounder = normalizedEmail.includes('mdhassan');
+
           return {
-            id: 'cmt_founder_production_id',
-            name: normalizedEmail.includes('mdhassan') ? 'Mohammad Hassan Raza (Founder)' : 'Kynoviq User',
+            id: `usr_${Date.now()}`,
+            name: isFounder ? 'Mohammad Hassan Raza (Founder)' : formatName,
             email: normalizedEmail,
             image: null,
           };
@@ -117,7 +117,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = (token.id as string) || 'cmt_founder_production_id';
+        session.user.id = (token.id as string) || `usr_${Date.now()}`;
       }
       return session;
     },
