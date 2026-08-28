@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/components/providers/AuthProvider';
 import { ToastProvider } from '@/components/ui/Toast';
+import { SupportWidget } from '@/components/layout/SupportWidget';
 
 export const metadata: Metadata = {
   title: 'Kynoviq AI — Think Smarter. Create Faster.',
@@ -36,7 +37,10 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="bg-[#0b0f19] text-slate-100 antialiased min-h-screen">
         <AuthProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            {children}
+            <SupportWidget />
+          </ToastProvider>
         </AuthProvider>
       </body>
     </html>
