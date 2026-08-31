@@ -203,16 +203,28 @@ export class MockAIProvider
     aspectRatio?: string;
     negativePrompt?: string;
   }): Promise<ImageGenerationOutput> {
-    // Generate contextually styled curated high-resolution AI art placeholders
-    const curatedImages = [
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1400&q=80',
-    ];
+    const p = (params.prompt || '').toLowerCase();
+    let imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80';
 
-    const idx = Math.floor(Math.random() * curatedImages.length);
+    if (p.includes('holographic') || p.includes('core') || p.includes('server') || p.includes('neon') || p.includes('purple') || p.includes('blue') || p.includes('artificial intelligence') || p.includes('ai')) {
+      imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80';
+    } else if (p.includes('cyberpunk') || p.includes('futuristic') || p.includes('city') || p.includes('tokyo')) {
+      imageUrl = 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80';
+    } else if (p.includes('nature') || p.includes('mountain') || p.includes('landscape')) {
+      imageUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80';
+    } else if (p.includes('product') || p.includes('coffee') || p.includes('drink') || p.includes('sneaker')) {
+      imageUrl = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1400&q=80';
+    } else if (p.includes('portrait') || p.includes('human') || p.includes('avatar') || p.includes('person')) {
+      imageUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80';
+    } else {
+      const fallbackList = [
+        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
+        'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
+        'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1400&q=80',
+        'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1400&q=80',
+      ];
+      imageUrl = fallbackList[Math.floor(Math.random() * fallbackList.length)];
+    }
 
     let width = 1024;
     let height = 1024;
@@ -228,7 +240,7 @@ export class MockAIProvider
     }
 
     return {
-      imageUrl: curatedImages[idx],
+      imageUrl,
       prompt: params.prompt,
       style: params.style || 'Cinematic Realism',
       aspectRatio: params.aspectRatio || '1:1',

@@ -216,11 +216,11 @@ export default function VideoGeneratorStudio() {
                   variant="primary"
                   size="md"
                   isLoading={isGenerating}
-                  onClick={triggerGenerationWithAd}
+                  onClick={handleGenerate}
                   className="w-full text-xs font-bold py-3 glow-indigo bg-sky-600 hover:bg-sky-500"
                   leftIcon={<Sparkles className="w-4 h-4" />}
                 >
-                  Generate 4K Video Scene
+                  {isGenerating ? 'Rendering 4K Scene...' : 'Generate 4K Video Scene'}
                 </Button>
               </div>
             </div>
