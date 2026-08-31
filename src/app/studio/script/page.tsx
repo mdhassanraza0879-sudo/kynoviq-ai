@@ -150,22 +150,51 @@ export default function ScriptGeneratorStudio() {
                             </div>
                           ))}
                         </div>
-                      </Button>
-                    </Link>
+                      )}
 
-                    <Link href={`/studio/voiceover?text=${encodeURIComponent(scriptData.hook)}`}>
-                      <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Mic className="w-3.5 h-3.5 text-indigo-400" />}>
-                        Send to Voiceover
-                      </Button>
-                    </Link>
+                      {/* Full Script */}
+                      {scriptData.fullScript && (
+                        <div className="p-3.5 rounded-xl bg-[#07090e] border border-white/[0.08] space-y-2">
+                          <span className="text-[10px] font-bold uppercase text-slate-400 font-mono">Full Teleprompter Text</span>
+                          <pre className="text-slate-300 font-sans text-xs whitespace-pre-wrap leading-relaxed">
+                            {scriptData.fullScript}
+                          </pre>
+                        </div>
+                      )}
+                    </div>
 
-                    <Link href={`/agent?prompt=${encodeURIComponent(ideaPrompt)}`}>
-                      <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                        Send to Creative Agent
-                      </Button>
-                    </Link>
+                    {/* Handoff Actions */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/[0.08]">
+                      <span className="text-xs font-mono text-slate-400">Send Script To:</span>
+
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Link href={`/studio/voiceover?text=${encodeURIComponent(scriptData.hook || '')}`}>
+                          <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Mic className="w-3.5 h-3.5 text-indigo-400" />}>
+                            Send to Voiceover
+                          </Button>
+                        </Link>
+
+                        <Link href={`/agent?prompt=${encodeURIComponent(ideaPrompt || '')}`}>
+                          <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+                            Send to Creative Agent
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="py-16 text-center space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto text-purple-400">
+                      <FileText className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-white">No Script Generated Yet</h4>
+                      <p className="text-xs text-slate-400 max-w-xs mx-auto">
+                        Enter your topic or idea on the left and click &quot;Generate Viral Script&quot;.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
