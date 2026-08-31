@@ -24,12 +24,11 @@ export default function FounderPage() {
           <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-white/[0.08]">
             <div className="relative group shrink-0">
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-indigo-500 via-sky-400 to-emerald-400 opacity-75 blur-md" />
-              <div className="relative w-32 h-32 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-950">
-                <img
-                  src="/founder.jpg"
-                  alt={SITE_CONFIG.founder.name}
-                  className="w-full h-full object-cover object-top"
-                />
+              <div className="relative w-32 h-32 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-gradient-to-br from-indigo-900/90 to-slate-950 flex flex-col items-center justify-center text-white">
+                <div className="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300 font-black text-2xl mb-1">
+                  HR
+                </div>
+                <span className="text-[11px] font-mono text-slate-400 font-bold uppercase">Founder & CEO</span>
               </div>
             </div>
             <div className="text-center sm:text-left space-y-1">

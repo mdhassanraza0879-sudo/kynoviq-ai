@@ -58,12 +58,11 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="relative group shrink-0">
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-indigo-500 to-sky-400 opacity-70 blur-md" />
-              <div className="relative w-28 h-28 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-slate-950">
-                <img
-                  src="/founder.jpg"
-                  alt={SITE_CONFIG.founder.name}
-                  className="w-full h-full object-cover object-top"
-                />
+              <div className="relative w-28 h-28 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-gradient-to-br from-indigo-900/80 to-slate-950 flex flex-col items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300 font-black text-xl mb-1">
+                  HR
+                </div>
+                <span className="text-[10px] font-mono text-slate-400 font-bold uppercase">Founder</span>
               </div>
             </div>
             <div className="text-center sm:text-left space-y-1">

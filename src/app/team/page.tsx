@@ -106,14 +106,8 @@ export default function TeamCollaborationPage() {
               {members.map((m) => (
                 <div key={m.id} className="py-3.5 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl overflow-hidden border border-white/20 shrink-0 bg-slate-950">
-                      {m.role === 'OWNER' ? (
-                        <img src="/founder.jpg" alt={m.name} className="w-full h-full object-cover object-top" />
-                      ) : (
-                        <div className="w-full h-full bg-[#0b0f19] flex items-center justify-center font-bold text-white text-xs">
-                          {m.avatar}
-                        </div>
-                      )}
+                    <div className="w-9 h-9 rounded-xl border border-white/20 shrink-0 bg-indigo-600/30 flex items-center justify-center font-bold text-white text-xs">
+                      {m.avatar}
                     </div>
                     <div>
                       <div className="flex items-center gap-2 font-bold text-white">

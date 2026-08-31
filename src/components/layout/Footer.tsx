@@ -39,12 +39,8 @@ export function Footer() {
             {/* Founder Mini Spotlight */}
             <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2 max-w-sm">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/20 shrink-0 bg-slate-950">
-                  <img
-                    src="/founder.jpg"
-                    alt={SITE_CONFIG.founder.name}
-                    className="w-full h-full object-cover object-top"
-                  />
+                <div className="w-10 h-10 rounded-xl border border-white/20 shrink-0 bg-indigo-600/30 flex items-center justify-center font-bold text-white text-xs font-mono">
+                  HR
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-bold text-white truncate">{SITE_CONFIG.founder.name}</div>

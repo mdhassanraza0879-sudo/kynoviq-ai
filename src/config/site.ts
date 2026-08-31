@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
   founder: {
     name: 'Mohammad Hassan Raza',
     role: 'Founder & Creator of Kynoviq Studio',
-    avatarUrl: '/founder.jpg',
+    avatarUrl: '',
     bio: 'Visionary product engineer & architect pioneering unified AI creative operating systems for the next generation of global creators, agencies, and enterprises.',
     email: 'mdhassanraza0879@gmail.com',
     phone: '7307670879',

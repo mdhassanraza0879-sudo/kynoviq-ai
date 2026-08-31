@@ -109,8 +109,8 @@ export function DashboardHeader({ title, subtitle }: { title?: string; subtitle?
             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
             className="flex items-center gap-2 p-1.5 rounded-xl bg-slate-900 border border-white/[0.08] hover:border-white/[0.15] transition-colors"
           >
-            <div className="w-7 h-7 rounded-lg overflow-hidden border border-white/20 shrink-0 bg-slate-950">
-              <img src="/founder.jpg" alt="Profile" className="w-full h-full object-cover object-top" />
+            <div className="w-7 h-7 rounded-lg border border-white/20 shrink-0 bg-indigo-600/40 flex items-center justify-center font-bold text-white text-[10px] font-mono">
+              HR
             </div>
             <ChevronDown className="w-3.5 h-3.5 text-slate-400 mr-1" />
           </button>

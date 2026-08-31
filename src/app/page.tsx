@@ -846,12 +846,11 @@ export default function LandingPage() {
               <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
                 <div className="relative group">
                   <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-indigo-500 via-sky-400 to-emerald-400 opacity-70 blur-md group-hover:opacity-100 transition-opacity" />
-                  <div className="relative w-36 h-36 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-950">
-                    <img
-                      src="/founder.jpg"
-                      alt={SITE_CONFIG.founder.name}
-                      className="w-full h-full object-cover object-top"
-                    />
+                  <div className="relative w-36 h-36 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-gradient-to-br from-indigo-900/90 to-slate-950 flex flex-col items-center justify-center text-white">
+                    <div className="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300 font-black text-2xl mb-1">
+                      HR
+                    </div>
+                    <span className="text-[11px] font-mono text-slate-400 font-bold uppercase">Founder & CEO</span>
                   </div>
                   <div className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-full bg-indigo-600 text-[10px] font-mono font-bold text-white border border-white/20 shadow-lg flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-300 fill-emerald-300/20" />

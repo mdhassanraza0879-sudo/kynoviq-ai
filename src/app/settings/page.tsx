@@ -41,8 +41,8 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl overflow-hidden border border-white/20 shrink-0 bg-slate-950">
-                    <img src="/founder.jpg" alt="Profile" className="w-full h-full object-cover object-top" />
+                  <div className="w-12 h-12 rounded-2xl border border-white/20 shrink-0 bg-indigo-600/30 flex items-center justify-center font-bold text-white font-mono text-sm">
+                    HR
                   </div>
                 </div>
               </div>
