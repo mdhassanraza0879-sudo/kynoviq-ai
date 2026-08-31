@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function CaptionsStudio() {
-  const [inputText, setInputText] = useState('ONE IDEA TRANSFORMS INTO INFINITE CREATION WITH KYNOVIQ STUDIO.');
+  const [inputText, setInputText] = useState('ONE IDEA TRANSFORMS INTO INFINITE CREATION WITH Kynoviq AI.');
   const [style, setStyle] = useState<'social' | 'bold' | 'clean' | 'highlight'>('social');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -27,7 +27,7 @@ export default function CaptionsStudio() {
     { start: '00:00:00', end: '00:00:01', text: 'ONE IDEA' },
     { start: '00:00:01', end: '00:00:02', text: 'TRANSFORMS INTO' },
     { start: '00:00:02', end: '00:00:04', text: 'INFINITE CREATION' },
-    { start: '00:00:04', end: '00:00:06', text: 'WITH KYNOVIQ STUDIO' },
+    { start: '00:00:04', end: '00:00:06', text: 'WITH Kynoviq AI' },
   ]);
 
   const handleGenerate = async () => {
@@ -58,7 +58,7 @@ export default function CaptionsStudio() {
   };
 
   const handleCopySRT = () => {
-    const srt = `1\n00:00:00,000 --> 00:00:02,000\nONE IDEA\n\n2\n00:00:02,000 --> 00:00:04,000\nINFINITE CREATION\n\n3\n00:00:04,000 --> 00:00:06,000\nWITH KYNOVIQ STUDIO`;
+    const srt = `1\n00:00:00,000 --> 00:00:02,000\nONE IDEA\n\n2\n00:00:02,000 --> 00:00:04,000\nINFINITE CREATION\n\n3\n00:00:04,000 --> 00:00:06,000\nWITH Kynoviq AI`;
     navigator.clipboard.writeText(srt);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Palette, Sparkles, Check, CheckCircle2, Save, Upload, Sliders } from 'lucide-react';
 
 export default function BrandKitPage() {
-  const [brandName, setBrandName] = useState('Kynoviq Studio');
+  const [brandName, setBrandName] = useState('Kynoviq AI');
   const [tagline, setTagline] = useState('One Idea. Infinite Creation.');
   const [primaryColor, setPrimaryColor] = useState('#6366f1');
   const [secondaryColor, setSecondaryColor] = useState('#38bdf8');
@@ -24,7 +24,7 @@ export default function BrandKitPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.brandKit) {
-          setBrandName(data.brandKit.brandName || 'Kynoviq Studio');
+          setBrandName(data.brandKit.brandName || 'Kynoviq AI');
           setTagline(data.brandKit.tagline || '');
           setPrimaryColor(data.brandKit.primaryColor || '#6366f1');
           setSecondaryColor(data.brandKit.secondaryColor || '#38bdf8');

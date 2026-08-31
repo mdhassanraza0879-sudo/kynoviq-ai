@@ -25,7 +25,7 @@ export class MockAIProvider
     IDubbingProvider
 {
   async generateScript(prompt: string, brandContext?: Record<string, any>): Promise<ScriptGenerationOutput> {
-    const brandName = brandContext?.brandName || 'Kynoviq Studio';
+    const brandName = brandContext?.brandName || 'Kynoviq AI';
     const brandTone = brandContext?.toneOfVoice || 'Engaging and authoritative';
 
     return {
@@ -68,7 +68,7 @@ export class MockAIProvider
         },
       ],
       callToAction: `Follow ${brandName} for daily AI creative breakthroughs & claim your free credits!`,
-      videoDescription: `Master ${prompt} with our comprehensive step-by-step breakdown. Built with Kynoviq Studio.\n\nTimestamps:\n0:00 - The Hook\n0:04 - The Core Problem\n0:12 - The AI Solution\n0:22 - Next Steps & CTA\n\n#AI #ContentCreation #KynoviqStudio #CreativeAI`,
+      videoDescription: `Master ${prompt} with our comprehensive step-by-step breakdown. Built with Kynoviq AI.\n\nTimestamps:\n0:00 - The Hook\n0:04 - The Core Problem\n0:12 - The AI Solution\n0:22 - Next Steps & CTA\n\n#AI #ContentCreation #KynoviqStudio #CreativeAI`,
       socialVersions: {
         shortHook: `Stop making this huge mistake with ${prompt.slice(0, 25)}! 🚀`,
         caption: `Here is the secret to scaling your content production 10x with AI. Comment 'CREATE' to get our complete blueprint! 👇`,
@@ -88,7 +88,7 @@ export class MockAIProvider
       {
         hook: `Still struggling to scale ${params.product}? Here is the solution engineered for ${params.targetAudience}.`,
         headline: `Transform How You Build ${params.product} with Kynoviq AI`,
-        primaryText: `Stop spending 20+ hours every week on manual content generation. With Kynoviq Studio, ${params.targetAudience} can turn any single prompt into ready-to-publish videos, voiceovers, and ads in 60 seconds.`,
+        primaryText: `Stop spending 20+ hours every week on manual content generation. With Kynoviq AI, ${params.targetAudience} can turn any single prompt into ready-to-publish videos, voiceovers, and ads in 60 seconds.`,
         cta: 'Claim 50 Free AI Credits Today',
         videoStoryboard: [
           { scene: 1, visual: 'Split comparison of manual editing vs 1-click AI generation', audio: 'What if you could produce a week of content in 5 minutes?' },
@@ -99,7 +99,7 @@ export class MockAIProvider
       },
       {
         hook: `The #1 secret ${params.targetAudience} are using to dominate ${params.platform}.`,
-        headline: `One Idea. Infinite Creation. Test Kynoviq Studio Free.`,
+        headline: `One Idea. Infinite Creation. Test Kynoviq AI Free.`,
         primaryText: `Tired of juggling 8 different expensive subscriptions? Kynoviq brings your entire creative stack under one roof—from HD video generation to multilingual dubbing and brand kit automation.`,
         cta: 'Start Creating Now',
         videoStoryboard: [
@@ -409,8 +409,8 @@ export class MockAIProvider
       fullText: dummyWords.join(' '),
       language: 'en-US',
       subtitles,
-      srtContent: `1\n00:00:00,000 --> 00:00:02,000\nWelcome to Kynoviq Studio.\n\n2\n00:00:02,100 --> 00:00:04,500\nOne idea transforms into infinite creation.\n\n3\n00:00:04,600 --> 00:00:08,000\nFrom AI scripts to multilingual dubbing.`,
-      vttContent: `WEBVTT\n\n00:00:00.000 --> 00:00:02.000\nWelcome to Kynoviq Studio.\n\n00:00:02.100 --> 00:00:04.500\nOne idea transforms into infinite creation.`,
+      srtContent: `1\n00:00:00,000 --> 00:00:02,000\nWelcome to Kynoviq AI.\n\n2\n00:00:02,100 --> 00:00:04,500\nOne idea transforms into infinite creation.\n\n3\n00:00:04,600 --> 00:00:08,000\nFrom AI scripts to multilingual dubbing.`,
+      vttContent: `WEBVTT\n\n00:00:00.000 --> 00:00:02.000\nWelcome to Kynoviq AI.\n\n00:00:02.100 --> 00:00:04.500\nOne idea transforms into infinite creation.`,
     };
   }
 

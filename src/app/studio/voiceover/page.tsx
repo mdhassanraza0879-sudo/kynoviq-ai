@@ -36,7 +36,7 @@ const VOICES: VoiceItem[] = [
 
 export default function VoiceoverStudio() {
   const [scriptText, setScriptText] = useState(
-    'क्यूनोविक स्टूडियो में आपका स्वागत है। एक विचार को अनंत निर्माण में बदलें। Welcome to Kynoviq Studio. One idea transforms into infinite creation.'
+    'क्यूनोविक स्टूडियो में आपका स्वागत है। एक विचार को अनंत निर्माण में बदलें। Welcome to Kynoviq AI. One idea transforms into infinite creation.'
   );
   const [selectedVoice, setSelectedVoice] = useState<string>('voice_hassan_deep');
   const [speed, setSpeed] = useState<number>(1.0);

@@ -6,42 +6,43 @@ import { SupportWidget } from '@/components/layout/SupportWidget';
 import { GlobalCommandBar } from '@/components/ui/GlobalCommandBar';
 
 export const metadata: Metadata = {
-  title: 'KYNOVIQ STUDIO — One Idea. Infinite Creation.',
+  title: 'KYNOVIQ AI — Think Smarter. Create Faster.',
   description:
-    'All-in-one AI creative platform for creators, students, influencers, freelancers, agencies and brands. Create videos, images, scripts, voiceovers, captions, and ad campaigns seamlessly.',
+    'All-in-one AI platform for creators, students, developers, freelancers, startups and brands. Generate scripts, 4K videos, AI images, voiceovers, code, captions, and intelligent campaigns seamlessly.',
   keywords: [
-    'Kynoviq Studio',
-    'AI Creative Platform',
+    'Kynoviq AI',
+    'AI Workspace',
     'AI Video Generator',
     'AI Video Editor',
     'AI Image Generator',
     'AI Voiceover',
+    'AI Code Assistant',
     'AI Subtitles',
     'AI Dubbing',
     'AI Creative Agent',
     'AI SaaS',
     'Content Creation',
   ],
-  authors: [{ name: 'Mohammad Hassan Raza', url: 'https://kynoviq.studio' }],
+  authors: [{ name: 'Mohammad Hassan Raza', url: 'https://kynoviq-ai.vercel.app' }],
   openGraph: {
-    title: 'KYNOVIQ STUDIO — One Idea. Infinite Creation.',
+    title: 'KYNOVIQ AI — Think Smarter. Create Faster.',
     description:
-      'All-in-one AI creative workspace: scripts, 4K videos, browser timeline editing, neural voices, captions, and multilingual dubbing.',
-    url: 'https://kynoviq.studio',
-    siteName: 'KYNOVIQ STUDIO',
+      'All-in-one AI workspace: scripts, 4K videos, AI image generation, neural voices, captions, and multilingual dubbing.',
+    url: 'https://kynoviq-ai.vercel.app',
+    siteName: 'KYNOVIQ AI',
     type: 'website',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
         width: 1200,
         height: 630,
-        alt: 'Kynoviq Studio Creative Ecosystem',
+        alt: 'Kynoviq AI Intelligent Ecosystem',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KYNOVIQ STUDIO — One Idea. Infinite Creation.',
+    title: 'KYNOVIQ AI — Think Smarter. Create Faster.',
     description:
       'All-in-one AI creative workspace: scripts, 4K videos, browser timeline editing, neural voices, captions, and multilingual dubbing.',
   },

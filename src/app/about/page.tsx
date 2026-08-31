@@ -22,7 +22,7 @@ export default function AboutPage() {
             The AI Creative Operating System
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Kynoviq Studio was born out of a simple observation: modern creators, agencies, and brands waste up to 80% of their creative energy wrestling with fragmented AI tools.
+            Kynoviq AI was born out of a simple observation: modern creators, agencies, and brands waste up to 80% of their creative energy wrestling with fragmented AI tools.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-sm text-slate-300 leading-relaxed">
-            “Kynoviq Studio is dedicated to elevating human creativity, not replacing it. By providing creators with autonomous agents, synchronized audio-visual workspaces, and unified brand governance, we empower anyone with a vision to produce studio-grade digital content at the speed of thought.”
+            “Kynoviq AI is dedicated to elevating human creativity, not replacing it. By providing creators with autonomous agents, synchronized audio-visual workspaces, and unified brand governance, we empower anyone with a vision to produce studio-grade digital content at the speed of thought.”
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export default function AboutPage() {
         <div className="text-center pt-6">
           <Link href="/agent">
             <Button variant="primary" size="lg" className="text-sm font-bold glow-indigo" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Start Creating on Kynoviq Studio
+              Start Creating on Kynoviq AI
             </Button>
           </Link>
         </div>

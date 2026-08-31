@@ -31,7 +31,7 @@ export default function ContactPage() {
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
             <span>24/7 Creator & Enterprise Support</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-white">Contact Kynoviq Studio</h1>
+          <h1 className="text-4xl sm:text-5xl font-black text-white">Contact Kynoviq AI</h1>
           <p className="text-slate-400 text-sm sm:text-base">
             Reach out for enterprise custom integrations, API keys, custom model fine-tuning, or feedback.
           </p>

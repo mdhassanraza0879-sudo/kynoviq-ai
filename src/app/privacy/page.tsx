@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">1. Information We Collect</h2>
             <p>
-              At Kynoviq Studio, we collect account information (such as name and email address), uploaded media assets (images, audio files, and video clips for processing), and generation prompts required to execute your AI creative requests.
+              At Kynoviq AI, we collect account information (such as name and email address), uploaded media assets (images, audio files, and video clips for processing), and generation prompts required to execute your AI creative requests.
             </p>
           </section>
 
@@ -36,14 +36,14 @@ export default function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">3. Commercial Ownership of Generated Assets</h2>
             <p>
-              Subject to your compliance with our Terms of Service and active subscription status, you maintain full commercial ownership and licensing rights over all scripts, images, videos, audio tracks, and subtitles generated through Kynoviq Studio.
+              Subject to your compliance with our Terms of Service and active subscription status, you maintain full commercial ownership and licensing rights over all scripts, images, videos, audio tracks, and subtitles generated through Kynoviq AI.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">4. Security & Encryption</h2>
             <p>
-              All data transmitted between your browser and Kynoviq Studio servers is encrypted using industry-standard TLS 1.3 encryption. Media assets stored in cloud object storage are encrypted at rest with AES-256 protocols.
+              All data transmitted between your browser and Kynoviq AI servers is encrypted using industry-standard TLS 1.3 encryption. Media assets stored in cloud object storage are encrypted at rest with AES-256 protocols.
             </p>
           </section>
 

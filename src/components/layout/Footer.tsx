@@ -23,11 +23,11 @@ export function Footer() {
                 <div className="flex items-center gap-1.5">
                   <span className="font-black text-lg tracking-wider text-white">KYNOVIQ</span>
                   <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30">
-                    STUDIO
+                    AI
                   </span>
                 </div>
                 <span className="text-[10px] text-slate-400 tracking-tight font-medium">
-                  One Idea. Infinite Creation.
+                  Think Smarter. Create Faster.
                 </span>
               </div>
             </Link>
@@ -205,7 +205,7 @@ export function Footer() {
         {/* Bottom copyright & attribution bar */}
         <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} Kynoviq Studio. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Kynoviq AI. All rights reserved.</span>
             <span>•</span>
             <span className="text-indigo-400 font-medium">One Idea. Infinite Creation.</span>
           </div>

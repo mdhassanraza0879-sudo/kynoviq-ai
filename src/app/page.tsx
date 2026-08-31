@@ -321,19 +321,19 @@ export default function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. WHAT IS KYNOVIQ STUDIO? (COMPANY INTRODUCTION) */}
+      {/* 3. WHAT IS Kynoviq AI? (COMPANY INTRODUCTION) */}
       {/* ========================================================================= */}
       <section id="features" className="py-24 bg-[#07090e] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-indigo-400">
-              About Kynoviq Studio
+              About Kynoviq AI
             </span>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
               One Unified Ecosystem for the Entire Creative Lifecycle.
             </h2>
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Kynoviq Studio is an AI-powered creative ecosystem designed to bring content creation, video editing, branding, translation, and marketing workflows into one high-performance platform.
+              Kynoviq AI is an AI-powered creative ecosystem designed to bring content creation, video editing, branding, translation, and marketing workflows into one high-performance platform.
             </p>
           </div>
 
@@ -771,7 +771,7 @@ export default function LandingPage() {
               Simple 4-Step Process
             </span>
             <h2 className="text-3xl sm:text-5xl font-black text-white">
-              How Kynoviq Studio Works.
+              How Kynoviq AI Works.
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
               Turn raw concepts into finished, published digital content in minutes.
@@ -834,7 +834,7 @@ export default function LandingPage() {
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white">Built with Vision.</h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              Meet the creator driving the architecture of Kynoviq Studio.
+              Meet the creator driving the architecture of Kynoviq AI.
             </p>
           </div>
 
@@ -866,7 +866,7 @@ export default function LandingPage() {
               {/* Founder Story & Clean Contact Information */}
               <div className="md:col-span-8 space-y-5">
                 <p className="text-sm text-slate-300 leading-relaxed font-normal">
-                  “We engineered Kynoviq Studio to eliminate the massive fragmentation in digital creation. Today’s creators and businesses shouldn’t have to stitch together 10 different expensive AI subscriptions. Kynoviq unifies scriptwriting, 4K video generation, timeline editing, neural voices, dubbing, and brand automation into a single cohesive operating system.”
+                  “We engineered Kynoviq AI to eliminate the massive fragmentation in digital creation. Today’s creators and businesses shouldn’t have to stitch together 10 different expensive AI subscriptions. Kynoviq unifies scriptwriting, 4K video generation, timeline editing, neural voices, dubbing, and brand automation into a single cohesive operating system.”
                 </p>
 
                 {/* Professional Contact Card */}
@@ -1059,7 +1059,7 @@ export default function LandingPage() {
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-sky-400">
                 Get in Touch
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">Contact Kynoviq Studio</h2>
+              <h2 className="text-2xl sm:text-3xl font-black text-white">Contact Kynoviq AI</h2>
               <p className="text-xs sm:text-sm text-slate-400">
                 Have questions regarding enterprise licenses, custom models, or feedback? Drop us a message.
               </p>
@@ -1138,7 +1138,7 @@ export default function LandingPage() {
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Turn your ideas into professional content with Kynoviq Studio. Start with 50 free credits—no credit card required.
+            Turn your ideas into professional content with Kynoviq AI. Start with 50 free credits—no credit card required.
           </p>
 
           <div className="pt-2">

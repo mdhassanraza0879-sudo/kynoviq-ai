@@ -1,28 +1,28 @@
 import { StudioToolMeta } from '@/types/studio';
 
 export const SITE_CONFIG = {
-  name: 'KYNOVIQ STUDIO',
-  shortName: 'Kynoviq',
-  tagline: 'One Idea. Infinite Creation.',
+  name: 'KYNOVIQ AI',
+  shortName: 'Kynoviq AI',
+  tagline: 'Think Smarter. Create Faster.',
   description:
-    'Kynoviq Studio is an all-in-one AI creative platform where creators, students, influencers, freelancers, businesses, agencies and brands can create, edit, transform and manage digital content from one place.',
-  url: 'https://kynoviq.studio',
+    'Kynoviq AI is an intelligent all-in-one AI platform where creators, students, developers, freelancers, startups and businesses can create, edit, code, and manage digital content from one place.',
+  url: 'https://kynoviq-ai.vercel.app',
   ogImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
   founder: {
     name: 'Mohammad Hassan Raza',
-    role: 'Founder & Creator of Kynoviq Studio',
+    role: 'Founder & CEO of Kynoviq AI',
     avatarUrl: '',
-    bio: 'Visionary product engineer & architect pioneering unified AI creative operating systems for the next generation of global creators, agencies, and enterprises.',
+    bio: 'Visionary product engineer & architect pioneering unified AI operating systems for the next generation of global creators, developers, and enterprises.',
     email: 'mdhassanraza0879@gmail.com',
     phone: '7307670879',
     socials: {
-      github: 'https://github.com',
+      github: 'https://github.com/mdhassanraza0879-sudo',
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com',
     },
   },
   links: {
-    github: 'https://github.com/kynoviq/studio',
+    github: 'https://github.com/mdhassanraza0879-sudo/kynoviq-ai',
     docs: '/tools',
     privacy: '/privacy',
     terms: '/terms',
@@ -275,9 +275,9 @@ export const CREDIT_PACKAGES = [
 
 export const FAQ_ITEMS = [
   {
-    question: 'What is Kynoviq Studio and how does it differ from regular AI chatbots?',
+    question: 'What is Kynoviq AI and how does it differ from regular AI chatbots?',
     answer:
-      'Kynoviq Studio is a complete AI Creative Operating System. Rather than just returning text, it unifies script generation, multi-track video editing, photorealistic image creation, neural voiceovers, automated subtitles, and multilingual dubbing into connected, production-ready workflows.',
+      'Kynoviq AI is a complete AI Creative Operating System. Rather than just returning text, it unifies script generation, multi-track video editing, photorealistic image creation, neural voiceovers, automated subtitles, and multilingual dubbing into connected, production-ready workflows.',
   },
   {
     question: 'How does the AI Creative Agent work?',
@@ -290,9 +290,9 @@ export const FAQ_ITEMS = [
       'Every generation transparently uses credits based on computing intensity. For example, Script generation costs 1 credit, Voiceover costs 3 credits, and HD Video generation costs 15 credits. You start with 50 free credits every month and can top-up anytime.',
   },
   {
-    question: 'Can I monetize content created on Kynoviq Studio?',
+    question: 'Can I monetize content created on Kynoviq AI?',
     answer:
-      'Yes! All content generated using Kynoviq Studio comes with full commercial rights for YouTube, Meta Ads, TikTok, client deliverables, and broadcast monetization.',
+      'Yes! All content generated using Kynoviq AI comes with full commercial rights for YouTube, Meta Ads, TikTok, client deliverables, and broadcast monetization.',
   },
   {
     question: 'Does the browser video editor require high-end computer hardware?',

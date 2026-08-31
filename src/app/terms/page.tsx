@@ -22,14 +22,14 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">1. Acceptance of Terms</h2>
             <p>
-              By accessing or using Kynoviq Studio, you agree to be bound by these Terms of Service. If you are entering into this agreement on behalf of a company or other legal entity, you represent that you have the authority to bind such entity.
+              By accessing or using Kynoviq AI, you agree to be bound by these Terms of Service. If you are entering into this agreement on behalf of a company or other legal entity, you represent that you have the authority to bind such entity.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">2. Acceptable Use & Content Policy</h2>
             <p>
-              You agree not to use Kynoviq Studio to generate deceptive deepfakes, hate speech, non-consensual voice clones, copyright-infringing media, or illegal material. We reserve the right to suspend accounts that violate acceptable use guidelines.
+              You agree not to use Kynoviq AI to generate deceptive deepfakes, hate speech, non-consensual voice clones, copyright-infringing media, or illegal material. We reserve the right to suspend accounts that violate acceptable use guidelines.
             </p>
           </section>
 
@@ -43,7 +43,7 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">4. Realistic Performance Disclaimer</h2>
             <p>
-              Kynoviq Studio does not promise, guarantee, or warrant specific revenue numbers, viral view thresholds, or algorithmic social media distribution. Creative success depends on your unique strategy, audience, and content quality.
+              Kynoviq AI does not promise, guarantee, or warrant specific revenue numbers, viral view thresholds, or algorithmic social media distribution. Creative success depends on your unique strategy, audience, and content quality.
             </p>
           </section>
         </div>

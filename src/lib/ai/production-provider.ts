@@ -49,7 +49,7 @@ export class ProductionAIProvider
         messages: [
           {
             role: 'system',
-            content: `You are Kynoviq Studio AI Script Engine. Return valid JSON only with keys: title, hook, introduction, fullScript, sceneBreakdown (array of {sceneNumber, visualDescription, bRollSuggestions, voiceoverText, durationEstimateSec, transitionType}), callToAction, videoDescription, socialVersions ({shortHook, caption, hashtags}).`,
+            content: `You are Kynoviq AI AI Script Engine. Return valid JSON only with keys: title, hook, introduction, fullScript, sceneBreakdown (array of {sceneNumber, visualDescription, bRollSuggestions, voiceoverText, durationEstimateSec, transitionType}), callToAction, videoDescription, socialVersions ({shortHook, caption, hashtags}).`,
           },
           {
             role: 'user',
@@ -66,7 +66,7 @@ export class ProductionAIProvider
         introduction: parsed.introduction || `Welcome back. Today we explore ${prompt}.`,
         fullScript: parsed.fullScript || `[SCENE 1]\nHost: "Here is everything you need to know about ${prompt}."`,
         sceneBreakdown: parsed.sceneBreakdown || [],
-        callToAction: parsed.callToAction || 'Follow Kynoviq Studio for more.',
+        callToAction: parsed.callToAction || 'Follow Kynoviq AI for more.',
         videoDescription: parsed.videoDescription || prompt,
         socialVersions: parsed.socialVersions || {
           shortHook: prompt,
@@ -97,7 +97,7 @@ export class ProductionAIProvider
         messages: [
           {
             role: 'system',
-            content: `You are Kynoviq Studio Ad Creative Engine. Return valid JSON array of 2 ad variations with keys: hook, headline, primaryText, cta, videoStoryboard (array of {scene, visual, audio}).`,
+            content: `You are Kynoviq AI Ad Creative Engine. Return valid JSON array of 2 ad variations with keys: hook, headline, primaryText, cta, videoStoryboard (array of {scene, visual, audio}).`,
           },
           {
             role: 'user',
@@ -126,7 +126,7 @@ export class ProductionAIProvider
         messages: [
           {
             role: 'system',
-            content: `You are Kynoviq Studio Social Engine. Return valid JSON array of variations with keys: platform, caption, hashtags (array), cta, idealPostTime, formatSuggestion.`,
+            content: `You are Kynoviq AI Social Engine. Return valid JSON array of variations with keys: platform, caption, hashtags (array), cta, idealPostTime, formatSuggestion.`,
           },
           {
             role: 'user',

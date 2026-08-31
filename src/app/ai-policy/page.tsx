@@ -22,7 +22,7 @@ export default function AIPolicyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-white">1. Responsible Generative AI</h2>
             <p>
-              Kynoviq Studio is committed to responsible generative AI technologies. Our models and provider integrations incorporate real-time safety guardrails to detect and prevent hate speech, harmful deepfakes, and non-consensual voice cloning.
+              Kynoviq AI is committed to responsible generative AI technologies. Our models and provider integrations incorporate real-time safety guardrails to detect and prevent hate speech, harmful deepfakes, and non-consensual voice cloning.
             </p>
           </section>
 

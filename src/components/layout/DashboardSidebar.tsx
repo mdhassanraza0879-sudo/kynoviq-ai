@@ -83,10 +83,10 @@ export function DashboardSidebar() {
             <div className="flex items-center gap-1.5">
               <span className="font-black text-sm tracking-wider text-white">KYNOVIQ</span>
               <span className="text-[9px] uppercase font-mono px-1 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold">
-                STUDIO
+                AI
               </span>
             </div>
-            <span className="text-[9px] text-slate-400 font-medium tracking-tight">One Idea. Infinite Creation.</span>
+            <span className="text-[9px] text-slate-400 font-medium tracking-tight">Think Smarter. Create Faster.</span>
           </div>
         </Link>
       </div>

@@ -55,10 +55,10 @@ export default function FounderPage() {
 
           <div className="space-y-4 text-sm text-slate-300 leading-relaxed font-normal">
             <p>
-              Mohammad Hassan Raza is the founder and lead architect behind <strong>Kynoviq Studio</strong>. With deep expertise across full-stack engineering, generative AI orchestration, and cloud architecture, Hassan established Kynoviq Studio to unify the fractured digital creation process into an autonomous, browser-first creative operating system.
+              Mohammad Hassan Raza is the founder and lead architect behind <strong>Kynoviq AI</strong>. With deep expertise across full-stack engineering, generative AI orchestration, and cloud architecture, Hassan established Kynoviq AI to unify the fractured digital creation process into an autonomous, browser-first creative operating system.
             </p>
             <p>
-              Under his technical leadership, Kynoviq Studio incorporates high-res video diffusion pipelines, multi-track WebGL timeline rendering, neural Hindi and multilingual speech models, automated subtitle synchronizers, and DAG-based autonomous campaign agents.
+              Under his technical leadership, Kynoviq AI incorporates high-res video diffusion pipelines, multi-track WebGL timeline rendering, neural Hindi and multilingual speech models, automated subtitle synchronizers, and DAG-based autonomous campaign agents.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function FounderPage() {
         <div className="text-center">
           <Link href="/agent">
             <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Experience Kynoviq Studio
+              Experience Kynoviq AI
             </Button>
           </Link>
         </div>

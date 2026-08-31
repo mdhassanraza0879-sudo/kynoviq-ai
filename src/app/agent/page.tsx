@@ -324,7 +324,7 @@ export default function CreativeAgentPage() {
                     <div className="space-y-3">
                       <span className="text-white font-bold block">Instagram & TikTok Copy:</span>
                       <p className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                        ✨ Ready to master {goalPrompt}? Stop wasting hours on manual editing. Try the 1-click creative pipeline on Kynoviq Studio today! 👇
+                        ✨ Ready to master {goalPrompt}? Stop wasting hours on manual editing. Try the 1-click creative pipeline on Kynoviq AI today! 👇
                         <br /><br />
                         #KynoviqStudio #AICreator #ViralReels #CreatorEconomy
                       </p>
