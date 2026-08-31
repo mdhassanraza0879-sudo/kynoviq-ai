@@ -337,61 +337,83 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* 6 Core Pillars */}
+          {/* 6 Core Pillars - Fully Active & Interactive */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: 'CREATE',
+                href: '/chat',
+                actionText: 'Launch AI Creator',
                 icon: <Wand2 className="w-6 h-6 text-indigo-400" />,
                 desc: 'Generate viral video scripts, photorealistic images, 4K video clips, neural voiceovers, and high-converting ad copy from a single prompt.',
                 badge: 'Generative AI',
               },
               {
                 title: 'EDIT',
+                href: '/studio/editor',
+                actionText: 'Open Video Editor',
                 icon: <Film className="w-6 h-6 text-sky-400" />,
                 desc: 'Full multi-track browser video editor with trimming, splitting, transitions, animated text, and background removal without external software.',
                 badge: 'Browser Studio',
               },
               {
                 title: 'ENHANCE',
+                href: '/studio/captions',
+                actionText: 'Auto Captions & FX',
                 icon: <Sparkles className="w-6 h-6 text-emerald-400" />,
-                desc: 'Smart silence removal, audio normalization, automated subtitle styling, viral hook detection, and 8K visual upscaling.',
+                desc: 'Smart silence removal, audio normalization, automated subtitle styling, viral hook detection, and visual upscaling.',
                 badge: 'Automated FX',
               },
               {
                 title: 'BRAND',
+                href: '/brand-kit',
+                actionText: 'Configure Brand Kit',
                 icon: <Palette className="w-6 h-6 text-purple-400" />,
                 desc: 'Centrally maintain your logo, color palette, custom fonts, and brand voice. Automatically injected into every generation.',
                 badge: 'Identity Kit',
               },
               {
                 title: 'PUBLISH',
+                href: '/studio/social',
+                actionText: 'Generate Social Ads',
                 icon: <Share2 className="w-6 h-6 text-amber-400" />,
                 desc: 'One-click format presets for Instagram Reels, YouTube Shorts, Meta Ads, TikTok, and LinkedIn with auto-aspect ratio framing.',
                 badge: 'Multi-Channel',
               },
               {
                 title: 'ANALYZE',
+                href: '/analytics',
+                actionText: 'View Live Analytics',
                 icon: <BarChart3 className="w-6 h-6 text-rose-400" />,
-                desc: 'Track creation history, AI credits consumption, cloud storage, engagement projections, and team asset versioning seamlessly.',
+                desc: 'Track creation history, AI usage consumption, storage, engagement projections, and team asset versioning seamlessly.',
                 badge: 'Live Metrics',
               },
             ].map((card) => (
-              <div
+              <Link
                 key={card.title}
-                className="p-8 rounded-2xl bg-slate-900/60 border border-white/[0.08] backdrop-blur-xl hover:border-indigo-500/40 transition-all group hover:-translate-y-1 shadow-xl"
+                href={card.href}
+                className="p-8 rounded-2xl bg-slate-900/60 border border-white/[0.08] backdrop-blur-xl hover:border-indigo-500/50 transition-all group hover:-translate-y-1.5 shadow-xl flex flex-col justify-between block cursor-pointer hover:shadow-indigo-500/10"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.08] group-hover:bg-indigo-600/20 group-hover:border-indigo-500/30 transition-colors">
-                    {card.icon}
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.08] group-hover:bg-indigo-600/20 group-hover:border-indigo-500/40 transition-colors">
+                      {card.icon}
+                    </div>
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-slate-300 group-hover:text-indigo-300">
+                      {card.badge}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-slate-300">
-                    {card.badge}
-                  </span>
+                  <h3 className="text-xl font-black text-white mb-2 group-hover:text-indigo-300 transition-colors">
+                    {card.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{card.desc}</p>
                 </div>
-                <h3 className="text-xl font-black text-white mb-2">{card.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{card.desc}</p>
-              </div>
+
+                <div className="pt-6 mt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-bold text-indigo-400 group-hover:text-indigo-300">
+                  <span>{card.actionText}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
