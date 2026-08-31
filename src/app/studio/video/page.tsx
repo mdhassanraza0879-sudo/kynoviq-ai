@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 export default function VideoGeneratorStudio() {
-  const [prompt, setPrompt] = useState('Cinematic drone shot of futuristic Tokyo skyline at night with holographic advertisements');
+  const [prompt, setPrompt] = useState('');
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>('9:16');
   const [duration, setDuration] = useState<number>(15);
   const [style, setStyle] = useState<VideoStyle>('Cinematic Realism');
@@ -30,12 +30,7 @@ export default function VideoGeneratorStudio() {
   const [quality, setQuality] = useState<'Standard 1080p' | 'Ultra 4K'>('Standard 1080p');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showAdModal, setShowAdModal] = useState(false);
-  const [generatedVideo, setGeneratedVideo] = useState<any>({
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-    durationSec: 15,
-    aspectRatio: '9:16',
-  });
+  const [generatedVideo, setGeneratedVideo] = useState<any>(null);
 
   const triggerGenerationWithAd = () => {
     if (!prompt.trim() || isGenerating) return;

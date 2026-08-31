@@ -51,7 +51,7 @@ const INITIAL_STEPS: StepState[] = [
 ];
 
 export default function CreativeAgentPage() {
-  const [goalPrompt, setGoalPrompt] = useState('Launch a 30-second viral Instagram campaign for eco-friendly sneakers');
+  const [goalPrompt, setGoalPrompt] = useState('');
   const [isExecuting, setIsExecuting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [steps, setSteps] = useState<StepState[]>(INITIAL_STEPS);

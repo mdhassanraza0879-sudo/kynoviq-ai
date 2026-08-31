@@ -13,8 +13,8 @@ import Link from 'next/link';
 export default function IdeaGeneratorPage() {
   const toast = useToast();
   const [topic, setTopic] = useState('');
-  const [targetAudience, setTargetAudience] = useState('Tech Founders & Creators');
-  const [goal, setGoal] = useState('Build a $10k/mo Micro-SaaS');
+  const [targetAudience, setTargetAudience] = useState('');
+  const [goal, setGoal] = useState('');
   const [result, setResult] = useState<IdeaGeneratorResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 

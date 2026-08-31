@@ -8,29 +8,11 @@ import { Button } from '@/components/ui/Button';
 import { Share2, Sparkles, Copy, Check, Hash, Calendar, ArrowRight } from 'lucide-react';
 
 export default function SocialStudio() {
-  const [topic, setTopic] = useState('How modern founders use AI to scale content creation');
+  const [topic, setTopic] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['Instagram', 'LinkedIn', 'YouTube', 'TikTok']);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
-
-  const [posts, setPosts] = useState<any[]>([
-    {
-      platform: 'Instagram',
-      caption: `✨ 3 Game-Changing steps to 10x your content output with AI:\n\n1️⃣ Automate repetitive scriptwriting & captions\n2️⃣ Focus 100% on creative vision\n3️⃣ Distribute across all channels instantly\n\nSave this post for your next launch & comment 'CREATE' for our complete template! 👇`,
-      hashtags: ['#ContentCreator', '#AITools', '#CreatorEconomy', '#ReelsTips', '#KynoviqStudio'],
-      cta: 'Comment CREATE for free template',
-      idealPostTime: '6:30 PM EST',
-      formatSuggestion: '9:16 Reel + 5-Slide Carousel',
-    },
-    {
-      platform: 'LinkedIn',
-      caption: `The future of digital content isn't about working more hours—it's about removing production friction.\n\nWhen we analyzed how modern creator teams ship content, the data was clear: teams using unified AI creative ecosystems produce 5.4x more variations at 80% lower overhead.\n\nWhat is your biggest creative bottleneck today? Let's discuss in the comments.`,
-      hashtags: ['#GenerativeAI', '#Productivity', '#CreatorEconomy', '#Leadership'],
-      cta: 'Share your thoughts below',
-      idealPostTime: '8:45 AM EST',
-      formatSuggestion: 'Text + Document Slide Deck (PDF Carousel)',
-    },
-  ]);
+  const [posts, setPosts] = useState<any[]>([]);
 
   const togglePlatform = (p: string) => {
     if (selectedPlatforms.includes(p)) {

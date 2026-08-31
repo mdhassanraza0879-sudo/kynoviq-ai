@@ -19,28 +19,10 @@ import {
 } from 'lucide-react';
 
 export default function ScriptGeneratorStudio() {
-  const [ideaPrompt, setIdeaPrompt] = useState('Create a viral YouTube video about how AI is transforming content creation');
+  const [ideaPrompt, setIdeaPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-  const [scriptData, setScriptData] = useState<any>({
-    title: 'The Ultimate Guide to AI Content Creation in 2026',
-    hook: 'Did you know that 90% of creators struggle with manual editing? Here is how to fix it in 30 seconds.',
-    introduction: 'Welcome back to Kynoviq AI. Today we are breaking down the exact AI frameworks top creators use.',
-    fullScript: `[SCENE 1: HOOK (0-4s)]\nVisual: Fast whip-pan cut to high-energy creator looking at camera.\nHost: "Stop scrolling if you want to master AI creation in 2026."\n\n[SCENE 2: THE PROBLEM (4-12s)]\nVisual: Split screen showing frustration with 10 different tabs vs unified AI studio.\nHost: "Most people waste hours juggling separate tools for scripts, audio, and video without results."\n\n[SCENE 3: THE AI SOLUTION (12-22s)]\nVisual: Screen recording showing 1-click video synthesis and multi-track timeline.\nHost: "With Kynoviq AI, you turn any idea into full production-grade assets in 60 seconds."\n\n[SCENE 4: CTA (22-30s)]\nVisual: Glowing brand card with animated swipe up and claim credits button.\nHost: "Try it today on Kynoviq AI and create without limits!"`,
-    sceneBreakdown: [
-      { sceneNumber: 1, visualDescription: 'Extreme close up with neon rim lighting, fast zoom-in', bRollSuggestions: ['Futuristic neon city timelapse', 'Fast typing on glowing cyber keyboard'], voiceoverText: 'Stop scrolling if you want to master AI creation.', durationEstimateSec: 4 },
-      { sceneNumber: 2, visualDescription: 'Split screen comparing manual editing vs AI automation', bRollSuggestions: ['Overwhelmed creator staring at timeline', 'Clock ticking at 2x speed'], voiceoverText: 'Most people waste hours juggling separate tools without results.', durationEstimateSec: 8 },
-      { sceneNumber: 3, visualDescription: '3D holographic workspace generating assets automatically', bRollSuggestions: ['AI neural nodes connecting', 'High-res video rendering on timeline'], voiceoverText: 'With Kynoviq AI, you turn any idea into production-grade assets in 60 seconds.', durationEstimateSec: 10 },
-      { sceneNumber: 4, visualDescription: 'Hero brand card with particle glow and CTA button', bRollSuggestions: ['Satisfied creator celebrating', 'Mobile feed getting thousands of likes'], voiceoverText: 'Try it today on Kynoviq AI and create without limits!', durationEstimateSec: 8 },
-    ],
-    callToAction: 'Claim your 50 free credits on Kynoviq AI today!',
-    videoDescription: 'Master AI video production with our comprehensive step-by-step breakdown. #KynoviqStudio #AICreator #VideoProduction',
-    socialVersions: {
-      shortHook: 'Stop making this huge mistake with AI video production! 🚀',
-      caption: 'Here is the secret to scaling your content output 10x with unified AI workspaces.',
-      hashtags: ['#KynoviqStudio', '#AICreator', '#ViralReels', '#VideoEditing'],
-    },
-  });
+  const [scriptData, setScriptData] = useState<any>(null);
 
   const handleGenerate = async () => {
     if (!ideaPrompt.trim() || isGenerating) return;

@@ -42,7 +42,7 @@ import {
 
 export default function LandingPage() {
   // Sandbox State
-  const [sandboxPrompt, setSandboxPrompt] = useState('Launch a 30s viral Instagram Reel for a sustainable coffee startup');
+  const [sandboxPrompt, setSandboxPrompt] = useState('');
   const [isSandboxRunning, setIsSandboxRunning] = useState(false);
   const [sandboxStep, setSandboxStep] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);

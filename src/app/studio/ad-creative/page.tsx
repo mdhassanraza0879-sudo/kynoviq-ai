@@ -8,25 +8,12 @@ import { Button } from '@/components/ui/Button';
 import { Target, Sparkles, Copy, Check, ArrowRight, Layers } from 'lucide-react';
 
 export default function AdCreativeStudio() {
-  const [product, setProduct] = useState('Kynoviq AI AI Creative Operating System');
-  const [audience, setAudience] = useState('Creators, marketing agencies, and startups');
+  const [product, setProduct] = useState('');
+  const [audience, setAudience] = useState('');
   const [platform, setPlatform] = useState('Meta & Instagram Ads');
   const [goal, setGoal] = useState('High-Converting Free Trial Signups');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [ads, setAds] = useState<any[]>([
-    {
-      hook: 'Still paying for 8 separate AI subscriptions? Here is the fix.',
-      headline: 'One Idea. Infinite Creation. Try Kynoviq AI Free.',
-      primaryText: 'Stop wasting hours switching between fragmented AI tools. Kynoviq unifies scripts, 4K video generation, browser timeline editing, neural Hindi & English voices, and automated captions in one place.',
-      cta: 'Claim 50 Free AI Credits',
-      videoStoryboard: [
-        { scene: 1, visual: 'Frustrated editor with 15 open tabs', audio: 'Tired of paying $300/mo for 10 separate AI tools?' },
-        { scene: 2, visual: 'Clean Kynoviq AI dashboard generating full campaign in 30s', audio: 'Kynoviq brings your entire creative stack under one roof.' },
-        { scene: 3, visual: 'Hero CTA with glowing start button', audio: 'Claim your 50 free credits now.' },
-      ],
-      displayVariationUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-    },
-  ]);
+  const [ads, setAds] = useState<any[]>([]);
 
   const handleGenerate = async () => {
     setIsGenerating(true);

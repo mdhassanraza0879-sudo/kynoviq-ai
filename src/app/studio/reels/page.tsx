@@ -21,13 +21,7 @@ import {
 export default function ReelsCreatorStudio() {
   const [format, setFormat] = useState<'Reel' | 'Short' | 'TikTok'>('Reel');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [clipOutput, setClipOutput] = useState<any>({
-    title: 'Top 3 AI Productivity Secrets in 2026',
-    hook: 'Stop working 12-hour days when AI does this in 30 seconds!',
-    viralScore: 94,
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    durationSec: 22,
-  });
+  const [clipOutput, setClipOutput] = useState<any>(null);
 
   const handleProcessReel = () => {
     setIsProcessing(true);

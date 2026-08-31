@@ -35,19 +35,13 @@ const VOICES: VoiceItem[] = [
 ];
 
 export default function VoiceoverStudio() {
-  const [scriptText, setScriptText] = useState(
-    'क्यूनोविक स्टूडियो में आपका स्वागत है। एक विचार को अनंत निर्माण में बदलें। Welcome to Kynoviq AI. One idea transforms into infinite creation.'
-  );
+  const [scriptText, setScriptText] = useState('');
   const [selectedVoice, setSelectedVoice] = useState<string>('voice_hassan_deep');
   const [speed, setSpeed] = useState<number>(1.0);
   const [pitch, setPitch] = useState<number>(1.0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioOutput, setAudioOutput] = useState<any>({
-    audioUrl: 'https://actions.google.com/sounds/v1/science_fiction/scifi_hum.ogg',
-    durationSec: 8,
-    waveformFrequencies: Array.from({ length: 48 }, () => Math.floor(Math.random() * 80) + 20),
-  });
+  const [audioOutput, setAudioOutput] = useState<any>(null);
 
   const handleGenerate = async () => {
     if (!scriptText.trim() || isGenerating) return;

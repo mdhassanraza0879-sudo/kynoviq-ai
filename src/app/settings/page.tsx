@@ -1,16 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import { Button } from '@/components/ui/Button';
 import { Settings, User, Key, Bell, Shield, Save, CheckCircle2 } from 'lucide-react';
 
 export default function SettingsPage() {
-  const [name, setName] = useState('Mohammad Hassan Raza');
-  const [email, setEmail] = useState('mdhassanraza0879@gmail.com');
+  const { data: session } = useSession();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [openaiKey, setOpenaiKey] = useState('');
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    if (session?.user) {
+      if (session.user.name) setName(session.user.name);
+      if (session.user.email) setEmail(session.user.email);
+    }
+  }, [session]);
+
+  const initials = name
+    ? name
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase()
+    : 'U';
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +60,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-2xl border border-white/20 shrink-0 bg-indigo-600/30 flex items-center justify-center font-bold text-white font-mono text-sm">
-                    HR
+                    {initials}
                   </div>
                 </div>
               </div>
@@ -54,6 +72,7 @@ export default function SettingsPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name..."
                     className="w-full bg-[#07090e] border border-white/[0.1] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500"
                   />
                 </div>
@@ -64,6 +83,7 @@ export default function SettingsPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address..."
                     className="w-full bg-[#07090e] border border-white/[0.1] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500"
                   />
                 </div>

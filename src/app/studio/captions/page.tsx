@@ -18,17 +18,11 @@ import {
 } from 'lucide-react';
 
 export default function CaptionsStudio() {
-  const [inputText, setInputText] = useState('ONE IDEA TRANSFORMS INTO INFINITE CREATION WITH Kynoviq AI.');
+  const [inputText, setInputText] = useState('');
   const [style, setStyle] = useState<'social' | 'bold' | 'clean' | 'highlight'>('social');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-
-  const [subtitles, setSubtitles] = useState([
-    { start: '00:00:00', end: '00:00:01', text: 'ONE IDEA' },
-    { start: '00:00:01', end: '00:00:02', text: 'TRANSFORMS INTO' },
-    { start: '00:00:02', end: '00:00:04', text: 'INFINITE CREATION' },
-    { start: '00:00:04', end: '00:00:06', text: 'WITH Kynoviq AI' },
-  ]);
+  const [subtitles, setSubtitles] = useState<any[]>([]);
 
   const handleGenerate = async () => {
     if (!inputText.trim() || isGenerating) return;

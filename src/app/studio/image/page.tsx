@@ -21,16 +21,12 @@ import {
 } from 'lucide-react';
 
 export default function ImageGeneratorStudio() {
-  const [prompt, setPrompt] = useState('Photorealistic 8K product mockup of an energy drink can on dark stone pedestal with water droplets and neon backlight');
+  const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('Photorealistic 8K');
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>('1:1');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showAdModal, setShowAdModal] = useState(false);
-  const [imageOutput, setImageOutput] = useState<any>({
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
-    prompt: 'Photorealistic 8K product mockup',
-    aspectRatio: '1:1',
-  });
+  const [imageOutput, setImageOutput] = useState<any>(null);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const triggerSaveWithAd = () => {
