@@ -1,160 +1,99 @@
 import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Sparkles, Target, Zap, Shield, Mail, Phone, UserCheck, Cpu, Code2, Database } from 'lucide-react';
-
-export const metadata = {
-  title: 'About & Founder — Kynoviq AI',
-  description: 'Learn about Kynoviq AI vision, founder Mohammad Hassan Raza, and technology stack.',
-};
+import { Button } from '@/components/ui/Button';
+import { SITE_CONFIG } from '@/config/site';
+import { Sparkles, ArrowRight, ShieldCheck, Cpu, Zap, Heart, Mail, Phone } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b0f19] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen flex flex-col bg-[#07090e] text-slate-100 font-sans">
       <Navbar />
 
-      <main className="flex-1 py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-              <span>Company Vision & Leadership</span>
-            </div>
-            <h1 className="text-4xl font-black text-white sm:text-5xl">
-              About <span className="gradient-text">Kynoviq AI</span>
-            </h1>
-            <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
-              “Think smarter. Create faster.” — We are building the next generation of structured AI workspace software.
+      <main className="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 w-full space-y-16">
+        {/* Hero */}
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <span>Our Mission & Architectural Vision</span>
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight">
+            The AI Creative Operating System
+          </h1>
+          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+            Kynoviq Studio was born out of a simple observation: modern creators, agencies, and brands waste up to 80% of their creative energy wrestling with fragmented AI tools.
+          </p>
+        </div>
+
+        {/* Core Principles */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3">
+            <Cpu className="w-6 h-6 text-sky-400" />
+            <h3 className="text-lg font-bold text-white">Unified Pipeline</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              No more copying text from one tab to another. Scripts flow directly into video generation, voice synthesis, automated subtitles, and timeline editing.
             </p>
           </div>
 
-          {/* FOUNDER SPOTLIGHT SECTION */}
-          <div className="glass-panel p-8 md:p-10 rounded-3xl border border-slate-800 space-y-8 bg-slate-900/80 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3">
+            <ShieldCheck className="w-6 h-6 text-emerald-400" />
+            <h3 className="text-lg font-bold text-white">Provider Agnostic</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              We never lock our platform to a single AI vendor. Our modular architecture allows real-time routing to best-in-class models across text, image, audio, and video.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
-              {/* Founder Image */}
-              <div className="md:col-span-5 flex flex-col items-center text-center space-y-3">
-                <div className="relative group">
-                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500 via-sky-500 to-purple-500 opacity-50 blur-lg group-hover:opacity-75 transition-opacity" />
-                  <div className="relative w-56 h-64 sm:w-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-slate-700 shadow-2xl">
-                    <Image
-                      src="/founder.jpg"
-                      alt="Mohammad Hassan Raza — Founder & CEO"
-                      fill
-                      className="object-cover object-top"
-                      priority
-                    />
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30">
-                    <UserCheck className="w-3.5 h-3.5" />
-                    <span>Founder & CEO</span>
-                  </span>
-                </div>
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3">
+            <Zap className="w-6 h-6 text-indigo-400" />
+            <h3 className="text-lg font-bold text-white">Browser-First Studio</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              High-performance WebGL and cloud acceleration bring professional multi-track video editing into any browser without heavy GPU requirements.
+            </p>
+          </div>
+        </div>
+
+        {/* Founder Card Spotlight */}
+        <div className="p-8 sm:p-10 rounded-3xl bg-slate-900/40 border border-white/[0.08] space-y-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="relative group shrink-0">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-indigo-500 to-sky-400 opacity-70 blur-md" />
+              <div className="relative w-28 h-28 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-slate-950">
+                <img
+                  src="/founder.jpg"
+                  alt={SITE_CONFIG.founder.name}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-
-              {/* Founder Details & Bio */}
-              <div className="md:col-span-7 space-y-6">
-                <div className="space-y-2">
-                  <h2 className="text-2xl sm:text-3xl font-black text-white">
-                    Mohammad Hassan Raza
-                  </h2>
-                  <p className="text-xs font-bold uppercase tracking-wider text-indigo-400">
-                    Founder & Chief Executive Officer — Kynoviq AI
-                  </p>
-                </div>
-
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                  “I founded Kynoviq AI with a clear mission: to eliminate the friction between human imagination and artificial intelligence execution. Instead of struggling with complex prompts, creators, engineers, and students deserve specialized, intelligent tools designed specifically for their workflow.”
-                </p>
-
-                {/* Direct Contact Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                  <a
-                    href="mailto:mdhassanraza0879@gmail.com"
-                    className="p-3 bg-slate-950/80 hover:bg-slate-800/80 rounded-xl border border-slate-800 flex items-center gap-3 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 group-hover:scale-105 transition-transform">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] text-slate-500 font-semibold uppercase">Official Email</p>
-                      <p className="text-xs font-bold text-slate-200 truncate">mdhassanraza0879@gmail.com</p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="tel:7307670879"
-                    className="p-3 bg-slate-950/80 hover:bg-slate-800/80 rounded-xl border border-slate-800 flex items-center gap-3 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-sky-500/10 text-sky-400 group-hover:scale-105 transition-transform">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[10px] text-slate-500 font-semibold uppercase">Direct Phone</p>
-                      <p className="text-xs font-bold text-slate-200 truncate">+91 7307670879</p>
-                    </div>
-                  </a>
-                </div>
+            </div>
+            <div className="text-center sm:text-left space-y-1">
+              <h2 className="text-2xl font-black text-white">{SITE_CONFIG.founder.name}</h2>
+              <p className="text-xs text-indigo-400 font-mono font-bold">{SITE_CONFIG.founder.role}</p>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs font-mono text-slate-400 pt-2">
+                <a href={`mailto:${SITE_CONFIG.founder.email}`} className="hover:text-white flex items-center gap-1">
+                  <Mail className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>{SITE_CONFIG.founder.email}</span>
+                </a>
+                <a href={`tel:${SITE_CONFIG.founder.phone}`} className="hover:text-white flex items-center gap-1">
+                  <Phone className="w-3.5 h-3.5 text-sky-400" />
+                  <span>+91 {SITE_CONFIG.founder.phone}</span>
+                </a>
               </div>
             </div>
           </div>
 
-          {/* COMPANY ARCHITECTURE & STACK USED */}
-          <div className="space-y-6">
-            <div className="text-center space-y-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-400">Enterprise Technology</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">What Powers Kynoviq AI</h2>
-              <p className="text-xs text-slate-400">Engineered using modern, production-grade web technologies.</p>
-            </div>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            “Kynoviq Studio is dedicated to elevating human creativity, not replacing it. By providing creators with autonomous agents, synchronized audio-visual workspaces, and unified brand governance, we empower anyone with a vision to produce studio-grade digital content at the speed of thought.”
+          </p>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 bg-slate-900/70 border border-slate-800 rounded-2xl space-y-3">
-                <Cpu className="w-6 h-6 text-indigo-400" />
-                <h3 className="text-base font-bold text-white">Next.js App Router</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Fast server-side rendering, streaming client components, and Turbopack build optimization.
-                </p>
-              </div>
-              <div className="p-6 bg-slate-900/70 border border-slate-800 rounded-2xl space-y-3">
-                <Code2 className="w-6 h-6 text-sky-400" />
-                <h3 className="text-base font-bold text-white">OpenAI Neural Engine</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  GPT-4o system prompt pipelines configured for precision code analysis, study guides, and summaries.
-                </p>
-              </div>
-              <div className="p-6 bg-slate-900/70 border border-slate-800 rounded-2xl space-y-3">
-                <Database className="w-6 h-6 text-purple-400" />
-                <h3 className="text-base font-bold text-white">Prisma & NextAuth</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  PostgreSQL/SQLite ORM database persistence with bcryptjs password hashing and JWT session security.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* PHILOSOPHY & VALUES */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-xl space-y-3">
-              <Target className="w-6 h-6 text-indigo-400" />
-              <h3 className="text-base font-bold text-white">Focused Excellence</h3>
-              <p className="text-xs text-slate-400">Tailored system prompts and structured UI views per tool.</p>
-            </div>
-            <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-xl space-y-3">
-              <Zap className="w-6 h-6 text-amber-400" />
-              <h3 className="text-base font-bold text-white">Ultra Fast Speed</h3>
-              <p className="text-xs text-slate-400">Instant page transitions and live background execution.</p>
-            </div>
-            <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-xl space-y-3">
-              <Shield className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-base font-bold text-white">Privacy & Security</h3>
-              <p className="text-xs text-slate-400">Secure user data isolation with NextAuth and Prisma ORM.</p>
-            </div>
-          </div>
+        {/* CTA */}
+        <div className="text-center pt-6">
+          <Link href="/agent">
+            <Button variant="primary" size="lg" className="text-sm font-bold glow-indigo" rightIcon={<ArrowRight className="w-4 h-4" />}>
+              Start Creating on Kynoviq Studio
+            </Button>
+          </Link>
         </div>
       </main>
 

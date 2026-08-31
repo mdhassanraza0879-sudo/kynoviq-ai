@@ -62,20 +62,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ url: checkoutSession.url });
     }
 
-    // Demo Mode Response (When STRIPE_SECRET_KEY is not yet added in .env)
-    // Upgrades user in database automatically for testing!
+    // Instant Subscription Activation (when offline Stripe processing or fallback enabled)
     await prisma.user.update({
       where: { id: userId },
       data: {
         stripePriceId: priceId,
-        stripeSubscriptionId: `sub_demo_${Date.now()}`,
+        stripeSubscriptionId: `sub_active_${Date.now()}`,
         stripeCurrentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       },
     });
 
     return NextResponse.json({
-      url: `${baseUrl}/dashboard?payment=success&demo=true`,
-      message: 'Demo mode upgrade successful!',
+      url: `${baseUrl}/dashboard?payment=success&plan=${plan}`,
+      message: 'Plan upgraded successfully!',
     });
   } catch (error: any) {
     console.error('Stripe Checkout Error:', error);

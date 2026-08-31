@@ -8,21 +8,322 @@ datasource db {
 }
 
 model User {
-  id                     String         @id @default(cuid())
+  id                     String              @id @default(cuid())
   name                   String?
-  email                  String         @unique
+  email                  String              @unique
   password               String
   image                  String?
-  stripeCustomerId       String?        @unique
-  stripeSubscriptionId   String?        @unique
+  role                   String              @default("USER") // USER | CREATOR | ADMIN | SUPER_ADMIN
+  isSuspended            Boolean             @default(false)
+  
+  stripeCustomerId       String?             @unique
+  stripeSubscriptionId   String?             @unique
   stripePriceId          String?
   stripeCurrentPeriodEnd DateTime?
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
+  
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
 
+  profile                Profile?
+  creditBalance          CreditBalance?
+  creditTransactions     CreditTransaction[]
+  projects               Project[]
+  brandKits              BrandKit[]
+  workflows              Workflow[]
+  generations            Generation[]
+  assets                 Asset[]
+  templates              Template[]
+  teamMembers            TeamMember[]
+  notifications          Notification[]
   conversations          Conversation[]
   savedItems             SavedItem[]
   toolUsages             ToolUsage[]
+  adminLogs              AdminLog[]
+}
+
+model Profile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  bio            String?
+  company        String?
+  website        String?
+  socialLinks    String?  // JSON string
+  avatarUrl      String?
+  theme          String   @default("dark")
+  emailNotifs    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CreditBalance {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  totalCredits   Int      @default(50)
+  usedCredits    Int      @default(0)
+  bonusCredits   Int      @default(0)
+  planTier       String   @default("FREE") // FREE | PRO | BUSINESS
+  resetAt        DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CreditTransaction {
+  id             String   @id @default(cuid())
+  userId         String
+  amount         Int      // Negative for deduction, positive for top-up
+  balanceAfter   Int
+  actionType     String   // e.g. "VIDEO_GENERATION", "VOICEOVER", "SUBSCRIPTION_RENEWAL", "ADMIN_GRANT"
+  description    String?
+  metadata       String?  // JSON string
+  createdAt      DateTime @default(now())
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Plan {
+  id             String   @id @default(cuid())
+  tier           String   @unique // FREE | PRO | BUSINESS | ENTERPRISE
+  name           String
+  description    String
+  monthlyPrice   Float
+  yearlyPrice    Float
+  creditsPerMonth Int
+  maxProjects    Int
+  maxStorageMb   Int
+  features       String   // JSON string of feature keys/descriptions
+  isPopular      Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Project {
+  id             String           @id @default(cuid())
+  userId         String
+  teamId         String?
+  title          String
+  description    String?
+  category       String           @default("GENERAL") // REELS, YOUTUBE, AD, CAMPAIGN, PODCAST
+  thumbnailUrl   String?
+  status         String           @default("DRAFT") // DRAFT, IN_PROGRESS, READY, EXPORTED
+  settings       String?          // JSON string of canvas/aspect ratio/brand settings
+  isArchived     Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team           Team?            @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  versions       ProjectVersion[]
+  assets         Asset[]
+  workflows      Workflow[]
+  generations    Generation[]
+}
+
+model ProjectVersion {
+  id             String   @id @default(cuid())
+  projectId      String
+  versionNumber  Int
+  snapshotData   String   // JSON string of full canvas/timeline state
+  changelog      String?
+  createdAt      DateTime @default(now())
+
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Asset {
+  id             String   @id @default(cuid())
+  userId         String
+  projectId      String?
+  name           String
+  type           String   // VIDEO | IMAGE | AUDIO | SCRIPT | CAPTION | THUMBNAIL
+  url            String
+  fileSize       Int      @default(0)
+  mimeType       String?
+  durationSec    Float?
+  width          Int?
+  height         Int?
+  metadata       String?  // JSON string
+  isFavorite     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+}
+
+model BrandKit {
+  id             String   @id @default(cuid())
+  userId         String
+  brandName      String
+  tagline        String?
+  logoUrl        String?
+  primaryColor   String   @default("#6366f1")
+  secondaryColor String   @default("#38bdf8")
+  accentColor    String   @default("#10b981")
+  backgroundColor String  @default("#0b0f19")
+  textColor      String   @default("#f8fafc")
+  fontHeading    String   @default("Inter")
+  fontBody       String   @default("Inter")
+  toneOfVoice    String   @default("Professional & Energetic")
+  targetAudience String?
+  visualStyle    String?
+  autoInject     Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Workflow {
+  id             String         @id @default(cuid())
+  userId         String
+  projectId      String?
+  title          String
+  goalPrompt     String
+  status         String         @default("IDLE") // IDLE, PROCESSING, COMPLETED, FAILED, PAUSED
+  currentStepIdx Int            @default(0)
+  totalSteps     Int            @default(10)
+  metadata       String?        // JSON string of campaign outputs
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project        Project?       @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  steps          WorkflowStep[]
+}
+
+model WorkflowStep {
+  id             String   @id @default(cuid())
+  workflowId     String
+  stepOrder      Int
+  stepKey        String   // IDEA, STRATEGY, SCRIPT, SCENES, VISUALS, VIDEO, VOICEOVER, CAPTIONS, THUMBNAIL, SOCIAL_CAPTION, FINAL_EXPORT
+  title          String
+  status         String   @default("WAITING") // WAITING, PROCESSING, COMPLETED, FAILED, SKIPPED
+  inputData      String?  // JSON string
+  outputData     String?  // JSON string
+  errorMsg       String?
+  durationMs     Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  workflow       Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+}
+
+model Generation {
+  id             String   @id @default(cuid())
+  userId         String
+  projectId      String?
+  type           String   // GenerationType
+  provider       String   @default("KYNOVIQ_ENGINE")
+  model          String?
+  prompt         String
+  parameters     String?  // JSON string of parameters (duration, ratio, voice, etc.)
+  outputData     String?  // JSON or text string of results
+  status         String   @default("COMPLETED") // QUEUED, PROCESSING, COMPLETED, FAILED
+  creditsUsed    Int      @default(1)
+  error          String?
+  durationMs     Int?
+  createdAt      DateTime @default(now())
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+}
+
+model Template {
+  id             String   @id @default(cuid())
+  userId         String?
+  title          String
+  description    String
+  category       String   // REELS, SHORTS, YOUTUBE, ADS, BUSINESS, EDUCATION, GAMING, PODCAST, ECOMMERCE, BRAND
+  previewUrl     String
+  thumbnailUrl   String
+  aspectRatio    String   @default("9:16")
+  tags           String   // JSON string array
+  schemaData     String   // JSON string of timeline / script / layout config
+  isFeatured     Boolean  @default(false)
+  remixCount     Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Team {
+  id             String       @id @default(cuid())
+  name           String
+  slug           String       @unique
+  logoUrl        String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  members        TeamMember[]
+  projects       Project[]
+}
+
+model TeamMember {
+  id             String   @id @default(cuid())
+  teamId         String
+  userId         String
+  role           String   @default("EDITOR") // OWNER | ADMIN | EDITOR | VIEWER
+  invitedEmail   String?
+  joinedAt       DateTime @default(now())
+
+  team           Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  userId         String
+  title          String
+  message        String
+  type           String   @default("INFO") // INFO | SUCCESS | WARNING | ERROR | CREDIT
+  linkUrl        String?
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SystemConfig {
+  id                       String   @id @default("SYSTEM_DEFAULT")
+  siteName                 String   @default("KYNOVIQ STUDIO")
+  tagline                  String   @default("One Idea. Infinite Creation.")
+  founderName              String   @default("Mohammad Hassan Raza")
+  founderRole              String   @default("Founder & Creator of Kynoviq Studio")
+  founderEmail             String   @default("mdhassanraza0879@gmail.com")
+  founderPhone             String   @default("7307670879")
+  showFounderPublicContact Boolean  @default(true)
+  
+  maintenanceMode          Boolean  @default(false)
+  allowRegistration        Boolean  @default(true)
+  defaultFreeCredits       Int      @default(50)
+  creditRateVideo          Int      @default(15)
+  creditRateImage          Int      @default(2)
+  creditRateVoice          Int      @default(3)
+  creditRateScript         Int      @default(1)
+  creditRateDubbing        Int      @default(10)
+  creditRateCaptions       Int      @default(2)
+  creditRateAgent          Int      @default(25)
+  
+  updatedAt                DateTime @updatedAt
+}
+
+model AdminLog {
+  id             String   @id @default(cuid())
+  adminId        String
+  action         String   // e.g. "USER_SUSPEND", "CREDIT_ADJUST", "CONFIG_UPDATE", "PLAN_EDIT"
+  targetId       String?
+  details        String?  // JSON string
+  ipAddress      String?
+  createdAt      DateTime @default(now())
+
+  admin          User     @relation(fields: [adminId], references: [id], onDelete: Cascade)
 }
 
 model Conversation {
@@ -51,9 +352,9 @@ model SavedItem {
   id        String   @id @default(cuid())
   userId    String
   title     String
-  toolType  String   // "CHAT" | "SUMMARIZER" | "STUDY" | "CODE" | "WRITING" | "IDEAS"
+  toolType  String
   content   String
-  metadata  String?  // JSON stringified optional metadata
+  metadata  String?
   createdAt DateTime @default(now())
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -62,7 +363,7 @@ model SavedItem {
 model ToolUsage {
   id            String   @id @default(cuid())
   userId        String
-  toolType      String   // "SUMMARIZER" | "STUDY" | "CODE" | "WRITING" | "IDEAS" | "CHAT"
+  toolType      String
   inputSnippet  String?
   outputSnippet String?
   createdAt     DateTime @default(now())

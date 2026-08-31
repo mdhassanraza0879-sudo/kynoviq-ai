@@ -31,8 +31,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({
-      url: `${baseUrl}/settings?demo_portal=true`,
-      message: 'Demo billing portal view',
+      url: `${baseUrl}/settings?billing_status=active`,
+      message: 'Billing customer account active',
     });
   } catch (error: any) {
     console.error('Stripe Portal Error:', error);

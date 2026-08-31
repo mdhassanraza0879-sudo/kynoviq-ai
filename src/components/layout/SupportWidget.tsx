@@ -19,7 +19,7 @@ export const SupportWidget: React.FC = () => {
     {
       id: 'init',
       role: 'bot',
-      text: 'Hello! 👋 Welcome to Kynoviq AI. I am your 24/7 Virtual Assistant. How can I assist your work or college presentation today?',
+      text: 'Hello! 👋 Welcome to Kynoviq AI. I am your 24/7 Virtual Assistant. How can I assist your workflow, startup, or content creation today?',
     },
   ]);
 
@@ -115,7 +115,7 @@ export const SupportWidget: React.FC = () => {
                   <span>Kynoviq Live Support</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 </h3>
-                <p className="text-[10px] text-slate-400">24/7 AI Assistant & College Demo Assistant</p>
+                <p className="text-[10px] text-slate-400">24/7 AI Workspace & Enterprise Assistant</p>
               </div>
             </div>
             <button
@@ -165,7 +165,7 @@ export const SupportWidget: React.FC = () => {
 
           {/* Quick Preset Chips */}
           <div className="px-3 py-1.5 border-t border-slate-800/60 bg-slate-950/40 flex gap-1.5 overflow-x-auto">
-            {['Tell me about Founder', 'What features are in Kynoviq?', 'How to present in college?'].map(
+            {['Tell me about Founder', 'What features are in Kynoviq?', 'Explore AI Tools'].map(
               (chip, i) => (
                 <button
                   key={i}
