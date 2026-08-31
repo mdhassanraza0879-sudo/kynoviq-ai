@@ -100,67 +100,56 @@ export default function ScriptGeneratorStudio() {
             {/* Right Output Inspector & Handoff Actions */}
             <div className="lg:col-span-7 space-y-6">
               <div className="p-6 rounded-3xl bg-slate-900/60 border border-white/[0.08] space-y-6 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-                  <div>
-                    <h3 className="text-base font-bold text-white">{scriptData.title}</h3>
-                    <span className="text-xs text-purple-400 font-mono">Ready for Production</span>
-                  </div>
+                {scriptData ? (
+                  <>
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+                      <div>
+                        <h3 className="text-base font-bold text-white">{scriptData.title}</h3>
+                        <span className="text-xs text-purple-400 font-mono">Ready for Production</span>
+                      </div>
 
-                  <button
-                    onClick={handleCopyScript}
-                    className="px-3 py-1.5 rounded-xl bg-white/[0.04] text-xs font-mono text-slate-300 flex items-center gap-1.5 hover:bg-white/[0.08]"
-                  >
-                    {isCopied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                    <span>{isCopied ? 'Copied' : 'Copy Script'}</span>
-                  </button>
-                </div>
+                      <button
+                        onClick={handleCopyScript}
+                        className="px-3 py-1.5 rounded-xl bg-white/[0.04] text-xs font-mono text-slate-300 flex items-center gap-1.5 hover:bg-white/[0.08]"
+                      >
+                        {isCopied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                        <span>{isCopied ? 'Copied' : 'Copy Script'}</span>
+                      </button>
+                    </div>
 
-                {/* Structured Script Sections */}
-                <div className="space-y-4 max-h-[420px] overflow-y-auto pr-1 text-xs">
-                  {/* Hook */}
-                  <div className="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-1 font-mono">
-                    <span className="text-[10px] font-bold uppercase text-purple-300">🔥 Viral 3-Second Hook</span>
-                    <p className="text-slate-200 font-sans text-xs">“{scriptData.hook}”</p>
-                  </div>
-
-                  {/* Scene Breakdown */}
-                  <div className="space-y-2">
-                    <span className="font-bold text-white uppercase tracking-wider font-mono text-[10px]">
-                      🎬 4-Scene Breakdown & B-Roll Suggestions
-                    </span>
-                    {scriptData.sceneBreakdown.map((s: any) => (
-                      <div key={s.sceneNumber} className="p-3 rounded-xl bg-[#07090e] border border-white/[0.06] space-y-1 font-mono text-[11px]">
-                        <div className="flex items-center justify-between text-purple-400 font-bold">
-                          <span>Scene {s.sceneNumber} ({s.durationEstimateSec}s)</span>
+                    {/* Structured Script Sections */}
+                    <div className="space-y-4 max-h-[420px] overflow-y-auto pr-1 text-xs">
+                      {/* Hook */}
+                      {scriptData.hook && (
+                        <div className="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-1 font-mono">
+                          <span className="text-[10px] font-bold uppercase text-purple-300">🔥 Viral 3-Second Hook</span>
+                          <p className="text-slate-200 font-sans text-xs">“{scriptData.hook}”</p>
                         </div>
-                        <p className="text-slate-300 font-sans"><strong>Visual:</strong> {s.visualDescription}</p>
-                        <p className="text-slate-400 font-sans"><strong>Voiceover:</strong> “{s.voiceoverText}”</p>
-                        <div className="flex flex-wrap gap-1 pt-1">
-                          {s.bRollSuggestions.map((b: string, i: number) => (
-                            <span key={i} className="px-1.5 py-0.2 bg-white/[0.03] text-slate-400 rounded text-[10px]">
-                              B-Roll: {b}
-                            </span>
+                      )}
+
+                      {/* Scene Breakdown */}
+                      {scriptData.sceneBreakdown && (
+                        <div className="space-y-2">
+                          <span className="font-bold text-white uppercase tracking-wider font-mono text-[10px]">
+                            🎬 4-Scene Breakdown & B-Roll Suggestions
+                          </span>
+                          {scriptData.sceneBreakdown.map((s: any) => (
+                            <div key={s.sceneNumber} className="p-3 rounded-xl bg-[#07090e] border border-white/[0.06] space-y-1 font-mono text-[11px]">
+                              <div className="flex items-center justify-between text-purple-400 font-bold">
+                                <span>Scene {s.sceneNumber} ({s.durationEstimateSec}s)</span>
+                              </div>
+                              <p className="text-slate-300 font-sans"><strong>Visual:</strong> {s.visualDescription}</p>
+                              <p className="text-slate-400 font-sans"><strong>Voiceover:</strong> “{s.voiceoverText}”</p>
+                              <div className="flex flex-wrap gap-1 pt-1">
+                                {s.bRollSuggestions?.map((b: string, i: number) => (
+                                  <span key={i} className="px-1.5 py-0.2 bg-white/[0.03] text-slate-400 rounded text-[10px]">
+                                    {b}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
                           ))}
                         </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Call to Action */}
-                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1 font-mono text-[11px]">
-                    <span className="text-slate-400 font-bold">CTA & Description:</span>
-                    <p className="text-slate-300 font-sans">{scriptData.callToAction}</p>
-                  </div>
-                </div>
-
-                {/* Handoff Actions */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/[0.08]">
-                  <span className="text-xs font-mono text-slate-400">Send Script To:</span>
-
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Link href={`/studio/video?prompt=${encodeURIComponent(scriptData.hook)}`}>
-                      <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Video className="w-3.5 h-3.5 text-sky-400" />}>
-                        Send to Video Gen
                       </Button>
                     </Link>
 

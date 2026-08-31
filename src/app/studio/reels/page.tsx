@@ -97,35 +97,53 @@ export default function ReelsCreatorStudio() {
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <span className="text-xs font-bold text-white">Processed 9:16 Clip</span>
                   <div className="flex items-center gap-2 font-mono text-xs">
-                    <span className="text-rose-400 font-bold flex items-center gap-1">
-                      <Flame className="w-3.5 h-3.5" />
-                      Viral Score: {clipOutput.viralScore}/100
-                    </span>
+                    {clipOutput && (
+                      <span className="text-rose-400 font-bold flex items-center gap-1">
+                        <Flame className="w-3.5 h-3.5" />
+                        Viral Score: {clipOutput.viralScore}/100
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                <div className="relative aspect-[9/16] max-h-[380px] mx-auto rounded-2xl overflow-hidden bg-black border border-white/[0.1]">
-                  <video src={clipOutput.videoUrl} autoPlay loop muted className="w-full h-full object-cover" />
-                  <div className="absolute top-4 inset-x-4 text-center">
-                    <span className="px-2.5 py-1 bg-black/80 text-yellow-400 font-mono font-bold text-[11px] rounded border border-yellow-400/30">
-                      ⚡ Hook: “{clipOutput.hook}”
-                    </span>
+                {clipOutput ? (
+                  <>
+                    <div className="relative aspect-[9/16] max-h-[380px] mx-auto rounded-2xl overflow-hidden bg-black border border-white/[0.1]">
+                      <video src={clipOutput.videoUrl} autoPlay loop muted className="w-full h-full object-cover" />
+                      <div className="absolute top-4 inset-x-4 text-center">
+                        <span className="px-2.5 py-1 bg-black/80 text-yellow-400 font-mono font-bold text-[11px] rounded border border-yellow-400/30">
+                          ⚡ Hook: “{clipOutput.hook}”
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+                      <a href={clipOutput.videoUrl} download="viral-reel.mp4">
+                        <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
+                          Download 9:16
+                        </Button>
+                      </a>
+
+                      <Link href="/studio/editor">
+                        <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+                          Fine-tune in Video Editor
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className="py-16 text-center space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto text-rose-400">
+                      <Smartphone className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-white">No Short Generated Yet</h4>
+                      <p className="text-xs text-slate-400 max-w-xs mx-auto">
+                        Choose your format on the left and click &quot;Generate Viral Short Clip&quot;.
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
-                  <a href={clipOutput.videoUrl} download="viral-reel.mp4">
-                    <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
-                      Download 9:16
-                    </Button>
-                  </a>
-
-                  <Link href="/studio/editor">
-                    <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                      Fine-tune in Video Editor
-                    </Button>
-                  </Link>
-                </div>
+                )}
               </div>
             </div>
           </div>

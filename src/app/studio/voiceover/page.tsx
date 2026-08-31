@@ -175,54 +175,70 @@ export default function VoiceoverStudio() {
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <span className="text-xs font-bold text-white">Audio Waveform & Player</span>
                   <span className="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
-                    Duration: ~{audioOutput.durationSec}s
+                    {audioOutput ? `Duration: ~${audioOutput.durationSec}s` : 'Neural Audio'}
                   </span>
                 </div>
 
-                {/* Animated Waveform Visualizer */}
-                <div className="h-44 rounded-2xl bg-[#07090e] border border-white/[0.08] flex items-center justify-center gap-1 px-6">
-                  {audioOutput.waveformFrequencies.map((val: number, i: number) => (
-                    <div
-                      key={i}
-                      className={`w-1 rounded-full transition-all duration-300 ${
-                        isPlaying ? 'bg-gradient-to-t from-indigo-500 to-sky-400 animate-pulse' : 'bg-indigo-600/40'
-                      }`}
-                      style={{ height: `${isPlaying ? Math.max(15, val) : val * 0.7}%` }}
-                    />
-                  ))}
-                </div>
+                {audioOutput ? (
+                  <>
+                    {/* Animated Waveform Visualizer */}
+                    <div className="h-44 rounded-2xl bg-[#07090e] border border-white/[0.08] flex items-center justify-center gap-1 px-6">
+                      {audioOutput.waveformFrequencies?.map((val: number, i: number) => (
+                        <div
+                          key={i}
+                          className={`w-1 rounded-full transition-all duration-300 ${
+                            isPlaying ? 'bg-gradient-to-t from-indigo-500 to-sky-400 animate-pulse' : 'bg-indigo-600/40'
+                          }`}
+                          style={{ height: `${isPlaying ? Math.max(15, val) : val * 0.7}%` }}
+                        />
+                      ))}
+                    </div>
 
-                {/* Audio Controls */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      className="p-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30"
-                    >
-                      {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current" />}
-                    </button>
-                    <div>
-                      <h4 className="text-xs font-bold text-white">Generated Voice Master</h4>
-                      <p className="text-[11px] text-slate-400 font-mono">48kHz Lossless WAV</p>
+                    {/* Audio Controls */}
+                    <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => setIsPlaying(!isPlaying)}
+                          className="p-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30"
+                        >
+                          {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current" />}
+                        </button>
+                        <div>
+                          <h4 className="text-xs font-bold text-white">Generated Voice Master</h4>
+                          <p className="text-[11px] text-slate-400 font-mono">48kHz Lossless WAV</p>
+                        </div>
+                      </div>
+
+                      <a href={audioOutput.audioUrl} download="kynoviq-voiceover.wav">
+                        <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
+                          Download Audio
+                        </Button>
+                      </a>
+                    </div>
+
+                    {/* Action Footer */}
+                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+                      <span className="text-xs text-slate-400 font-mono">Ready for video synchronization</span>
+                      <Link href="/studio/editor">
+                        <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<Film className="w-3.5 h-3.5" />}>
+                          Attach to Video Timeline
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className="py-16 text-center space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto text-indigo-400">
+                      <Mic className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-white">No Audio Synthesized Yet</h4>
+                      <p className="text-xs text-slate-400 max-w-xs mx-auto">
+                        Enter your voiceover text on the left and click &quot;Synthesize Voice Track&quot;.
+                      </p>
                     </div>
                   </div>
-
-                  <a href={audioOutput.audioUrl} download="kynoviq-voiceover.wav">
-                    <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
-                      Download Audio
-                    </Button>
-                  </a>
-                </div>
-
-                {/* Action Footer */}
-                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
-                  <span className="text-xs text-slate-400 font-mono">Ready for video synchronization</span>
-                  <Link href="/studio/editor">
-                    <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo" rightIcon={<Film className="w-3.5 h-3.5" />}>
-                      Attach to Video Timeline
-                    </Button>
-                  </Link>
-                </div>
+                )}
               </div>
             </div>
           </div>

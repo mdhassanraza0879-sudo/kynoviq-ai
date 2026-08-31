@@ -170,38 +170,54 @@ export default function ImageGeneratorStudio() {
                   </span>
                 </div>
 
-                <div className="relative aspect-square max-h-[460px] mx-auto rounded-2xl overflow-hidden bg-black border border-white/[0.1] flex items-center justify-center">
-                  <img
-                    src={imageOutput.imageUrl}
-                    alt={imageOutput.prompt}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                {imageOutput ? (
+                  <>
+                    <div className="relative aspect-square max-h-[460px] mx-auto rounded-2xl overflow-hidden bg-black border border-white/[0.1] flex items-center justify-center">
+                      <img
+                        src={imageOutput.imageUrl}
+                        alt={imageOutput.prompt || 'Generated Asset'}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                  <div className="flex items-center gap-2">
-                    <a href={imageOutput.imageUrl} target="_blank" rel="noreferrer" download="kynoviq-image.jpg">
-                      <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
-                        Download 8K
-                      </Button>
-                    </a>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={triggerSaveWithAd}
-                      className="text-xs font-bold"
-                      leftIcon={savedSuccess ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FolderKanban className="w-3.5 h-3.5" />}
-                    >
-                      {savedSuccess ? 'Saved!' : 'Save to Assets'}
-                    </Button>
+                    <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                      <div className="flex items-center gap-2">
+                        <a href={imageOutput.imageUrl} target="_blank" rel="noreferrer" download="kynoviq-image.jpg">
+                          <Button variant="secondary" size="sm" className="text-xs font-bold" leftIcon={<Download className="w-3.5 h-3.5" />}>
+                            Download 8K
+                          </Button>
+                        </a>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={triggerSaveWithAd}
+                          className="text-xs font-bold"
+                          leftIcon={savedSuccess ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FolderKanban className="w-3.5 h-3.5" />}
+                        >
+                          {savedSuccess ? 'Saved!' : 'Save to Assets'}
+                        </Button>
+                      </div>
+
+                      <Link href="/studio/editor">
+                        <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo">
+                          Send to Timeline Editor →
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className="aspect-square max-h-[460px] mx-auto rounded-2xl border-2 border-dashed border-white/[0.1] flex flex-col items-center justify-center text-center p-8 space-y-3">
+                    <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] text-slate-400">
+                      <ImageIcon className="w-8 h-8 text-indigo-400" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-white">No Asset Generated Yet</h4>
+                      <p className="text-xs text-slate-400 max-w-xs">
+                        Enter your prompt on the left and click &quot;Generate 8K Asset&quot; to synthesize.
+                      </p>
+                    </div>
                   </div>
-
-                  <Link href="/studio/editor">
-                    <Button variant="primary" size="sm" className="text-xs font-bold glow-indigo">
-                      Insert into Video Timeline →
-                    </Button>
-                  </Link>
-                </div>
+                )}
               </div>
             </div>
           </div>
